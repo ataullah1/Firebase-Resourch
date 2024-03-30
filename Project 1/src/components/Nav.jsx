@@ -3,6 +3,7 @@
 import { Button, Navbar } from 'flowbite-react';
 import { NavLink } from 'react-router-dom';
 import {
+  GithubAuthProvider,
   GoogleAuthProvider,
   getAuth,
   signInWithPopup,
@@ -15,9 +16,10 @@ function Nav() {
   const [userDetails, setUserDetails] = useState(null);
   // const { displayName, photoURL, email } = userDetails;
   const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-  const handleLogin = () => {
-    signInWithPopup(auth, provider)
+  const googleProvider = new GoogleAuthProvider();
+  const gitHubProvider = new GithubAuthProvider();
+  const handleLoginGoogle = () => {
+    signInWithPopup(auth, googleProvider)
       .then((res) => {
         const user = res.user;
         console.log(user);
@@ -27,7 +29,16 @@ function Nav() {
         console.log(error);
       });
   };
-
+  const handleLoginGitHub = () => {
+    signInWithPopup(auth, gitHubProvider)
+      .then((res) => {
+        const user = res.user;
+        setUserDetails(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const handleLogOut = () => {
     signOut(auth)
       .then((res) => {
@@ -51,7 +62,10 @@ function Nav() {
           {userDetails ? (
             <Button onClick={handleLogOut}>Log Out</Button>
           ) : (
-            <Button onClick={handleLogin}>Login</Button>
+            <>
+              <Button onClick={handleLoginGoogle}>Google Login</Button>
+              <Button onClick={handleLoginGitHub}>GitHub Login</Button>
+            </>
           )}
           <Navbar.Toggle />
         </div>
