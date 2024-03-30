@@ -1,11 +1,10 @@
-  import './App.css';
+import { createBrowserRouter } from 'react-router-dom';
+import Home from './pages/Home/Home';
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />,
+  },
+]);
 
-function App() {
-  return (
-    <>
-      <h1>Hello Firebase</h1>
-    </>
-  );
-}
-
-export default App;
+export default router;
