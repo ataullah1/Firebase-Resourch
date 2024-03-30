@@ -12,8 +12,8 @@ import app from '../firebase/firebase.init';
 import { useState } from 'react';
 
 function Nav() {
-  const [userDetails, setUserDetails] = useState({});
-  const { displayName, photoURL, email } = userDetails;
+  const [userDetails, setUserDetails] = useState(null);
+  // const { displayName, photoURL, email } = userDetails;
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const handleLogin = () => {
@@ -29,11 +29,11 @@ function Nav() {
   };
 
   const handleLogOut = () => {
-    signOut(auth, provider)
+    signOut(auth)
       .then((res) => {
-        const result = res.user;
+        // const result = res.user;
+        console.log(res);
         setUserDetails(null);
-        console.log(result);
       })
       .catch((error) => {
         console.log(error);
@@ -49,9 +49,9 @@ function Nav() {
         </Navbar.Brand>
         <div className="flex md:order-2">
           {userDetails ? (
-            <Button onClick={handleLogin}>Login</Button>
-          ) : (
             <Button onClick={handleLogOut}>Log Out</Button>
+          ) : (
+            <Button onClick={handleLogin}>Login</Button>
           )}
           <Navbar.Toggle />
         </div>
@@ -65,9 +65,13 @@ function Nav() {
       </Navbar>
       {userDetails && (
         <div className="border-2 border-pink-500 rounded-lg md:w-4/12 mx-auto p-5 my-9">
-          <img className="rounded-full h-16 w-16" src={photoURL} alt="" />
-          <p>Name:{displayName}</p>
-          <p>Email:{email}</p>
+          <img
+            className="rounded-full h-16 w-16"
+            src={userDetails.photoURL}
+            alt=""
+          />
+          <p>Name:{userDetails.displayName}</p>
+          <p>Email:{userDetails.email}</p>
         </div>
       )}
     </div>
