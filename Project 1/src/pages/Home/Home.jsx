@@ -1,11 +1,10 @@
-import { Button } from 'flowbite-react';
 
+import Nav from '../../components/Nav';
 
 const Home = () => {
   return (
     <div>
-      <h1>Hello Firebase</h1>
-      <Button>Click me</Button>
+      <Nav />
     </div>
   );
 };
