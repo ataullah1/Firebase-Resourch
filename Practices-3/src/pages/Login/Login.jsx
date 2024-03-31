@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import auth from '../../firebase/firebase.config';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from 'react';
@@ -10,15 +10,16 @@ const Login = () => {
     const email = e.target.email.value;
     const pass = e.target.password.value;
     // console.log(email, pass);
-    createUserWithEmailAndPassword(auth, email, pass)
-      .then((res) => {
-        const user = res.user;
+    signInWithEmailAndPassword(auth, email, pass)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
         console.log(user);
       })
       .catch((error) => {
         // const errorCode = error.code;
         const errorMessage = error.message;
-        console.error(errorMessage);
+        console.log(errorMessage);
       });
   };
   return (
@@ -46,7 +47,7 @@ const Login = () => {
             </label>
             <div className="relative w-full">
               <input
-                type="password"
+                type={eye ? 'text' : 'password'}
                 name="password"
                 placeholder="password"
                 className="input input-bordered w-full pr-14"
@@ -56,7 +57,7 @@ const Login = () => {
                 className="absolute top-1/2 -translate-y-1/2 right-4 text-xl cursor-pointer"
                 onClick={() => setEye(!eye)}
               >
-                <FaEye />
+                {eye ? <FaEye /> : <FaEyeSlash />}
               </span>
             </div>
             <label className="label">

@@ -1,6 +1,9 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import auth from '../../firebase/firebase.config';
+import { useState } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 const Register = () => {
+  const [eye, setEye] = useState(false);
   const handleRegister = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -50,13 +53,21 @@ const Register = () => {
             <label className="label">
               <span className="label-text">Password</span>
             </label>
-            <input
-              type="password"
-              name="password"
-              placeholder="password"
-              className="input input-bordered"
-              required
-            />
+            <div className="relative w-full">
+              <input
+                type={eye ? 'text' : 'password'}
+                name="password"
+                placeholder="password"
+                className="input input-bordered w-full pr-14"
+                required
+              />
+              <span
+                className="absolute top-1/2 -translate-y-1/2 right-4 text-xl cursor-pointer"
+                onClick={() => setEye(!eye)}
+              >
+                {eye ? <FaEye /> : <FaEyeSlash />}
+              </span>
+            </div>
           </div>
           <div className="form-control mt-6">
             <input
