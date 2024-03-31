@@ -3,6 +3,7 @@ import { Button, Navbar } from 'flowbite-react';
 import { NavLink } from 'react-router-dom';
 import {
   FacebookAuthProvider,
+  TwitterAuthProvider,
   getAuth,
   signInWithPopup,
   signOut,
@@ -14,6 +15,7 @@ function Nav() {
   const [data, setData] = useState(null);
   const auth = getAuth(app);
   const fbAuthProvider = new FacebookAuthProvider();
+  const xAuthProvider = new TwitterAuthProvider();
   const handleLoginFacebook = () => {
     signInWithPopup(auth, fbAuthProvider)
       .then((res) => {
@@ -25,7 +27,17 @@ function Nav() {
         console.log(error);
       });
   };
-  const handleLoginTwitter = () => {};
+  const handleLoginTwitter = () => {
+    signInWithPopup(auth, xAuthProvider)
+      .then((res) => {
+        const result = res.user;
+        console.log(result);
+        setData(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
