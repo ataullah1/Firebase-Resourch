@@ -19,7 +19,7 @@ const Register = () => {
     // console.log(email, pass);
     createUserWithEmailAndPassword(auth, email, pass)
       .then((res) => {
-        toast.success('Login is successful.');
+        toast.success('Register is successful.');
         const user = res.user;
         console.log(user);
       })
