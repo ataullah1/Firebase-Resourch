@@ -1,9 +1,25 @@
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import auth from '../../firebase/firebase.config';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useState } from 'react';
+
 const Login = () => {
+  const [eye, setEye] = useState(false);
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const pass = e.target.password.value;
-    console.log(email, pass);
+    // console.log(email, pass);
+    createUserWithEmailAndPassword(auth, email, pass)
+      .then((res) => {
+        const user = res.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        // const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(errorMessage);
+      });
   };
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
@@ -28,13 +44,21 @@ const Login = () => {
             <label className="label">
               <span className="label-text">Password</span>
             </label>
-            <input
-              type="password"
-              name="password"
-              placeholder="password"
-              className="input input-bordered"
-              required
-            />
+            <div className="relative w-full">
+              <input
+                type="password"
+                name="password"
+                placeholder="password"
+                className="input input-bordered w-full pr-14"
+                required
+              />
+              <span
+                className="absolute top-1/2 -translate-y-1/2 right-4 text-xl cursor-pointer"
+                onClick={() => setEye(!eye)}
+              >
+                <FaEye />
+              </span>
+            </div>
             <label className="label">
               <a
                 href="#"
