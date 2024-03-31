@@ -1,11 +1,17 @@
 const Register = () => {
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const pass = e.target.password.value;
+    console.log(email, pass);
+  };
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
       <div className="w-full md:w-9/12 lg:w-1/2 mx-auto border border-gray-300 rounded-lg">
         <h1 className="font-bold text-4xl text-center underline py-2">
           Register Now
         </h1>
-        <form className="card-body">
+        <form className="card-body" onSubmit={handleRegister}>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Name</span>
