@@ -4,10 +4,16 @@ import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 const Register = () => {
   const [eye, setEye] = useState(false);
+  const [errorText, setErrorText] = useState('');
   const handleRegister = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const pass = e.target.password.value;
+    const regex = /^(?=.*[A-Z])(?=.*\d{1,5})[a-zA-Z\d]{5,}$/;
+    if (!regex.test(pass)) {
+      setErrorText('Please input in uppercase, number, minimum 6 digits.');
+      return;
+    }
     // console.log(email, pass);
     createUserWithEmailAndPassword(auth, email, pass)
       .then((res) => {
@@ -68,6 +74,7 @@ const Register = () => {
                 {eye ? <FaEye /> : <FaEyeSlash />}
               </span>
             </div>
+            <p className="pt-2 text-red-500">{errorText}</p>
           </div>
           <div className="form-control mt-6">
             <input
