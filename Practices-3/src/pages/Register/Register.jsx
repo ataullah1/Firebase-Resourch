@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import auth from '../../firebase/firebase.config';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import toast, { Toaster } from 'react-hot-toast';
 const Register = () => {
   const [eye, setEye] = useState(false);
   const [errorText, setErrorText] = useState('');
@@ -18,6 +19,7 @@ const Register = () => {
     // console.log(email, pass);
     createUserWithEmailAndPassword(auth, email, pass)
       .then((res) => {
+        toast.success('Login is successful.');
         const user = res.user;
         console.log(user);
       })
@@ -29,6 +31,7 @@ const Register = () => {
   };
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
+      <Toaster />
       <div className="w-full md:w-9/12 lg:w-1/2 mx-auto border border-gray-300 rounded-lg">
         <h1 className="font-bold text-4xl text-center underline py-2">
           Register Now

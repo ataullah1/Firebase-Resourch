@@ -2,6 +2,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import auth from '../../firebase/firebase.config';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
   const [errorText, setErrorText] = useState('');
@@ -15,6 +16,7 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, pass)
       .then((userCredential) => {
         // Signed in
+        toast.success('Login is successful.');
         const user = userCredential.user;
         console.log(user);
       })
@@ -27,6 +29,7 @@ const Login = () => {
   };
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
+      <Toaster />
       <div className="w-full md:w-9/12 lg:w-1/2 mx-auto border border-gray-300 rounded-lg">
         <h1 className="font-bold text-4xl text-center underline py-2">
           Login Now
@@ -63,7 +66,9 @@ const Login = () => {
                 {eye ? <FaEye /> : <FaEyeSlash />}
               </span>
             </div>
-            <p className="pt-2 text-red-500">{errorText}</p>
+            {errorText.length > 0 && (
+              <p className="pt-2 text-red-500">{errorText}</p>
+            )}
             <label className="label">
               <a
                 href="#"
