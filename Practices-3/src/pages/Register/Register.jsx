@@ -6,6 +6,7 @@ const Register = () => {
   const [eye, setEye] = useState(false);
   const [errorText, setErrorText] = useState('');
   const handleRegister = (e) => {
+    setErrorText('');
     e.preventDefault();
     const email = e.target.email.value;
     const pass = e.target.password.value;

@@ -4,8 +4,10 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from 'react';
 
 const Login = () => {
+  const [errorText, setErrorText] = useState('');
   const [eye, setEye] = useState(false);
   const handleLogin = (e) => {
+    setErrorText('');
     e.preventDefault();
     const email = e.target.email.value;
     const pass = e.target.password.value;
@@ -16,10 +18,11 @@ const Login = () => {
         const user = userCredential.user;
         console.log(user);
       })
-      .catch((error) => {
+      .catch(() => {
         // const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
+        setErrorText('Incorrect password. Please input the correct password.');
+        // const errorMessage = error.message;
+        // console.log(errorMessage);
       });
   };
   return (
@@ -60,6 +63,7 @@ const Login = () => {
                 {eye ? <FaEye /> : <FaEyeSlash />}
               </span>
             </div>
+            <p className="pt-2 text-red-500">{errorText}</p>
             <label className="label">
               <a
                 href="#"
