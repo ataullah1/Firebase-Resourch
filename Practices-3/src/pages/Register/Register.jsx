@@ -11,7 +11,7 @@ const Register = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const pass = e.target.password.value;
-    const regex = /^(?=.*[A-Z])(?=.*\d{1,5})[a-zA-Z\d]{5,}$/;
+    const regex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
     if (!regex.test(pass)) {
       setErrorText('Please input in uppercase, number, minimum 6 digits.');
       return;
@@ -24,6 +24,7 @@ const Register = () => {
         console.log(user);
       })
       .catch((error) => {
+        toast.error('This email is already registered in use.');
         // const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorMessage);
