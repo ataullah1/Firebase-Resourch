@@ -27,7 +27,7 @@ const Register = () => {
         console.log(user);
         sendEmailVerification(res.user).then(() => {
           // Email verification sent!
-          toast.worn('Please Check Your Email. Then verified your account');
+          toast.worn('Please check your email. Then verified your account');
         });
       })
       .catch((error) => {
