@@ -1,4 +1,7 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from 'firebase/auth';
 import auth from '../../firebase/firebase.config';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -22,6 +25,10 @@ const Register = () => {
         toast.success('Register is successful.');
         const user = res.user;
         console.log(user);
+        sendEmailVerification(res.user).then(() => {
+          // Email verification sent!
+          toast.worn('Please Check Your Email. Then verified your account');
+        });
       })
       .catch((error) => {
         toast.error('This email is already registered in use.');
