@@ -76,7 +76,7 @@ const Register = () => {
                 className="absolute top-1/2 -translate-y-1/2 right-4 text-xl cursor-pointer"
                 onClick={() => setEye(!eye)}
               >
-                {eye ? <FaEye /> : <FaEyeSlash />}
+                {eye ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
             <p className="pt-2 text-red-500">{errorText}</p>
