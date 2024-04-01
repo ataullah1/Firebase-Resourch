@@ -45,6 +45,9 @@ const Nav = () => {
                 Home
               </NavLink>
               <NavLink to={'/'} className="hover:bg-slate-300">
+                Order
+              </NavLink>
+              <NavLink to={'/'} className="hover:bg-slate-300">
                 About
               </NavLink>
               <NavLink to={'/'} className="hover:bg-slate-300">
@@ -60,6 +63,12 @@ const Nav = () => {
           <ul className="menu menu-horizontal px-1 flex gap-6">
             <NavLink className="px-6 py-3 font-semibold hover:bg-slate-300 rounded-md">
               Home
+            </NavLink>
+            <NavLink
+              to={'orders'}
+              className="px-6 py-3 font-semibold hover:bg-slate-300 rounded-md"
+            >
+              Orders
             </NavLink>
             <NavLink className="px-6 py-3 font-semibold hover:bg-slate-300 rounded-md">
               About
