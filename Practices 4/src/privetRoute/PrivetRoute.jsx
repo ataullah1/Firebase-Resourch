@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 import { Navigate } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
 
 const PrivetRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);

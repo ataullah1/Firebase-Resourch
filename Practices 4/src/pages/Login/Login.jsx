@@ -2,10 +2,12 @@ import { useContext, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../../provider/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { signInUser } = useContext(AuthContext);
   const [eye, setEye] = useState(false);
+  const naviget = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -15,6 +17,8 @@ const Login = () => {
       .then((result) => {
         toast.success('Successfully Login');
         console.log(result.user);
+        e.target.reset();
+        naviget('/orders');
       })
       .catch((err) => {
         toast.error('Sorry');
