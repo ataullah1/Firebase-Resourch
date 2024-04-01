@@ -5,7 +5,7 @@ const Home = () => {
   const authInf = useContext(AuthContext);
   return (
     <div>
-      <h1 className="text-5xl"> Home Page: {authInf.name}</h1>
+      <h1 className="text-5xl"> Home Page</h1>
     </div>
   );
 };

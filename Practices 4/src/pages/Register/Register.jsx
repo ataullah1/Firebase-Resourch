@@ -3,8 +3,11 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Register = () => {
   const [eye, setEye] = useState(false);
-  const handleRegister = () => {
-    console.log('Register done');
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(email, password);
   };
 
   return (

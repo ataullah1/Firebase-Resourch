@@ -3,8 +3,11 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
   const [eye, setEye] = useState(false);
-  const handleLogin = () => {
-    console.log('afgasdf');
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(email, password);
   };
 
   const handleForget = () => {
