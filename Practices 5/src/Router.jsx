@@ -5,6 +5,7 @@ import Contact from './pages/Contact/Contact';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
+import Profile from './pages/Profile/Profile';
 
 export const AllRouter = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const AllRouter = createBrowserRouter([
       {
         path: 'register',
         element: <Register />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
       },
     ],
   },

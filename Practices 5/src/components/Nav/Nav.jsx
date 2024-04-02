@@ -1,7 +1,11 @@
+import { useState } from 'react';
+import pImg from '../../assets/react.svg';
 import { Toaster } from 'react-hot-toast';
 import { Link, NavLink } from 'react-router-dom';
+import ProfileMenu from '../ProfileMenu/ProfileMenu';
 
 const Nav = () => {
+  const [view, setView] = useState(false);
   return (
     <div>
       <Toaster />
@@ -62,17 +66,26 @@ const Nav = () => {
             </NavLink>
           </ul>
         </div>
-        {/* {user ? (
-          <div className="navbar-end flex gap-4 ">
-            <button
-              onClick={handleSignOut}
-              className="ml-auto font-semibold hover:bg-black hover:text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md border border-black active:scale-90 duration-150"
-            >
-              Sign Out
-            </button>
-          </div>
-        ) : ( */}
+        {/* {user ? (*/}
         <div className="navbar-end flex gap-4 ">
+          {/* <button className="ml-auto font-semibold hover:bg-black hover:text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md border border-black active:scale-90 duration-150">
+            Sign Out
+          </button> */}
+          <img
+            onClick={() => setView(!view)}
+            src={pImg}
+            className="border border-orange-400 rounded-full h-11 w-11 cursor-pointer p-1"
+            alt=""
+          />
+          {view && (
+            <div className="absolute top-20 right-4">
+              <ProfileMenu />
+            </div>
+          )}
+        </div>
+
+        {/*  ) : ( */}
+        {/* <div className="navbar-end flex gap-4 ">
           <Link
             to={'login'}
             className="font-semibold hover:bg-black hover:text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md border border-black active:scale-90 duration-150"
@@ -85,7 +98,7 @@ const Nav = () => {
           >
             Register
           </Link>
-        </div>
+        </div> */}
         {/* )} */}
       </div>
     </div>
