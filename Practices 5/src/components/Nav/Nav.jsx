@@ -9,13 +9,13 @@ const Nav = () => {
   return (
     <div>
       <Toaster />
-      <div className="navbar bg-base-100">
-        <div className="navbar-start">
+      <div className="navbar flex items-center flex-col sm:flex-row sm:justify-between bg-base-100 ">
+        <div className="navbar-start flex items-center flex-row-reverse justify-between w-full sm:w-auto sm:flex-row">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-7 w-7 rotate-180 sm:rotate-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -30,17 +30,40 @@ const Nav = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 ml-[-140px] sm:ml-0 z-[1] p-2 shadow bg-base-100 rounded-box w-52 border-2 border-solid border-orange-400"
             >
-              <NavLink to={'/'} className="hover:bg-slate-300">
+              <NavLink
+                to={'/'}
+                className="hover:bg-slate-300 py-2 px-4 rounded"
+              >
                 Home
               </NavLink>
-              <NavLink to={'about'} className="hover:bg-slate-300">
+              <NavLink
+                to={'about'}
+                className="hover:bg-slate-300 py-2 px-4 rounded"
+              >
                 About
               </NavLink>
-              <NavLink to={'contact'} className="hover:bg-slate-300">
+              <NavLink
+                to={'contact'}
+                className="hover:bg-slate-300 py-2 px-4 rounded"
+              >
                 Contact
               </NavLink>
+              <div className="flex flex-col-reverse gap-2 mt-2">
+                <Link
+                  to={'login'}
+                  className="font-semibold hover:bg-black hover:text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md border border-black active:scale-90 duration-150"
+                >
+                  Login
+                </Link>
+                <Link
+                  to={'register'}
+                  className="font-semibold bg-black text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md active:scale-90 duration-150"
+                >
+                  Register
+                </Link>
+              </div>
             </ul>
           </div>
           <Link to={'/'} className="text-3xl font-extrabold">
@@ -67,10 +90,7 @@ const Nav = () => {
           </ul>
         </div>
         {/* {user ? (*/}
-        <div className="navbar-end flex gap-4 ">
-          {/* <button className="ml-auto font-semibold hover:bg-black hover:text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md border border-black active:scale-90 duration-150">
-            Sign Out
-          </button> */}
+        {/* <div className="navbar-end flex gap-4 ">
           <img
             onClick={() => setView(!view)}
             src={pImg}
@@ -78,14 +98,14 @@ const Nav = () => {
             alt=""
           />
           {view && (
-            <div className="absolute top-20 right-4">
+            <div className="absolute top-16 lg:top-20 right-4">
               <ProfileMenu />
             </div>
           )}
-        </div>
+        </div> */}
 
         {/*  ) : ( */}
-        {/* <div className="navbar-end flex gap-4 ">
+        <div className="navbar-end gap-4 hidden sm:flex w-auto">
           <Link
             to={'login'}
             className="font-semibold hover:bg-black hover:text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md border border-black active:scale-90 duration-150"
@@ -98,7 +118,7 @@ const Nav = () => {
           >
             Register
           </Link>
-        </div> */}
+        </div>
         {/* )} */}
       </div>
     </div>

@@ -71,7 +71,7 @@ const Login = () => {
           </button>
         </form>
         <p className="pt-2">
-          Don't have an account? &nbsp;
+          {`Don't have an account?`} &nbsp;
           <Link to={'/register'} className="underline">
             Create Account
           </Link>

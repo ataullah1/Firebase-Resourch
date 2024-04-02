@@ -3,7 +3,7 @@ import pImg from '../../assets/react.svg';
 const ProfileMenu = () => {
   return (
     <div>
-      <div className="border-2 border-orange-400 rounded-md w-[300px] p-4">
+      <div className="border-2 bg-slate-500 text-white border-orange-400 rounded-md w-[300px] p-4">
         <div className="space-y-2">
           <img
             src={pImg}

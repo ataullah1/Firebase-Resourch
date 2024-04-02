@@ -1,11 +1,16 @@
-const AuthProvider = () => {
+import PropTypes from 'prop-types';
+import { createContext } from 'react';
+
+export const ContextProvider = createContext();
+const AuthProvider = ({ children }) => {
   return (
-    <div>
-      <h1 className="text-6xl font-bold text-center">
-        This is Auth Provider Section.
-      </h1>
-    </div>
+    <ContextProvider.Provider value={'infoProvider'}>
+      {children}
+    </ContextProvider.Provider>
   );
 };
 
 export default AuthProvider;
+AuthProvider.propTypes = {
+  children: PropTypes.node,
+};
