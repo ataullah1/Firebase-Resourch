@@ -3,7 +3,7 @@ import pImg from '../../assets/react.svg';
 import { useContext } from 'react';
 import { ContextProvider } from '../../provider/AuthProvider';
 const ProfileMenu = () => {
-  const { logOut } = useContext(ContextProvider);
+  const { user, logOut } = useContext(ContextProvider);
   const logOutAcc = () => {
     logOut()
       .then(() => {
@@ -13,12 +13,13 @@ const ProfileMenu = () => {
         console.log(err);
       });
   };
+  // console.log(user.photoURL);
   return (
     <div>
       <div className="border-2 bg-slate-500 text-white border-orange-400 rounded-md w-[300px] p-4">
         <div className="space-y-2">
           <img
-            src={pImg}
+            src={user.photoURL}
             alt=""
             className="h-16 w-16 border border-orange-400 p-2 rounded-full mx-auto"
           />

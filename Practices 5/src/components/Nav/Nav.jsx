@@ -95,7 +95,7 @@ const Nav = () => {
           <div className="navbar-end flex gap-4 w-auto">
             <img
               onClick={() => setView(!view)}
-              src={pImg}
+              src={user.photoURL}
               className="border border-orange-400 rounded-full h-11 w-11 cursor-pointer p-1"
               alt=""
             />
