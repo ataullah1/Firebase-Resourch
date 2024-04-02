@@ -10,7 +10,9 @@ const ProfileMenu = () => {
             alt=""
             className="h-16 w-16 border border-orange-400 p-2 rounded-full mx-auto"
           />
-          <h2 className="text-2xl font-semibold text-center">Md Ataullah</h2>
+          <h2 className="text-2xl font-semibold text-center">
+            Md Ataullah Vay
+          </h2>
           <div className="w-full text-center">
             <Link to={'profile'}>
               <button className="border-2 border-orange-400 relative inline-flex items-center justify-start px-6 py-1.5 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group">
