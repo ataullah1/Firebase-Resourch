@@ -50,7 +50,7 @@ const Nav = () => {
               <NavLink to={'/'} className="hover:bg-slate-300">
                 About
               </NavLink>
-              <NavLink to={'/'} className="hover:bg-slate-300">
+              <NavLink to={'contact'} className="hover:bg-slate-300">
                 Contact
               </NavLink>
             </ul>
@@ -73,7 +73,10 @@ const Nav = () => {
             <NavLink className="px-6 py-3 font-semibold hover:bg-slate-300 rounded-md">
               About
             </NavLink>
-            <NavLink className="px-6 py-3 font-semibold hover:bg-slate-300 rounded-md">
+            <NavLink
+              to={'contact'}
+              className="px-6 py-3 font-semibold hover:bg-slate-300 rounded-md"
+            >
               Contact
             </NavLink>
           </ul>

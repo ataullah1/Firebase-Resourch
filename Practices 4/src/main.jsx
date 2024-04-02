@@ -9,6 +9,7 @@ import Login from './pages/Login/Login';
 import AuthProvider from './provider/AuthProvider';
 import Orders from './pages/Order/Orders';
 import PrivetRoute from './privetRoute/PrivetRoute';
+import Contact from './pages/Contact/Contact';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: 'contact',
+        element: <Contact />,
       },
       {
         path: 'orders',
