@@ -16,7 +16,7 @@ const Home = () => {
         ref={inpRef}
         className="border-2 p-3 min-w-[500px] rounded-sm focus:border-yellow-500 outline-none"
         type="text"
-        placeholder="Enter Your Name."
+        placeholder="Enter Your Name"
       />
     </div>
   );
