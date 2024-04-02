@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { AuthContext } from '../../provider/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const { signInUser } = useContext(AuthContext);
   const [eye, setEye] = useState(false);
+  const naviget = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(email, password);
+    signInUser(email, password)
+      .then((result) => {
+        toast.success('Successfully Login');
+        console.log(result.user);
+        e.target.reset();
+        naviget('/orders');
+      })
+      .catch((err) => {
+        toast.error('Sorry');
+        console.log(err);
+      });
   };
 
   const handleForget = () => {
@@ -15,6 +31,7 @@ const Login = () => {
   };
   return (
     <div>
+      <Toaster />
       <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
         <div className="w-full md:w-9/12 lg:w-1/2 mx-auto border border-gray-300 rounded-lg">
           <h1 className="font-bold text-4xl text-center underline py-2">

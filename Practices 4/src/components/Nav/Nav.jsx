@@ -1,8 +1,23 @@
+import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../provider/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Nav = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleSignOut = () => {
+    logOut()
+      .then(() => {
+        toast.success('SignOut Successfully.');
+      })
+      .catch(() => {
+        toast.error('Sorry Not SignOut.');
+      });
+  };
+
   return (
     <div>
+      <Toaster />
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
@@ -30,6 +45,9 @@ const Nav = () => {
                 Home
               </NavLink>
               <NavLink to={'/'} className="hover:bg-slate-300">
+                Order
+              </NavLink>
+              <NavLink to={'/'} className="hover:bg-slate-300">
                 About
               </NavLink>
               <NavLink to={'/'} className="hover:bg-slate-300">
@@ -46,6 +64,12 @@ const Nav = () => {
             <NavLink className="px-6 py-3 font-semibold hover:bg-slate-300 rounded-md">
               Home
             </NavLink>
+            <NavLink
+              to={'orders'}
+              className="px-6 py-3 font-semibold hover:bg-slate-300 rounded-md"
+            >
+              Orders
+            </NavLink>
             <NavLink className="px-6 py-3 font-semibold hover:bg-slate-300 rounded-md">
               About
             </NavLink>
@@ -54,20 +78,31 @@ const Nav = () => {
             </NavLink>
           </ul>
         </div>
-        <div className="navbar-end flex gap-4">
-          <Link
-            to={'login'}
-            className="font-semibold hover:bg-black hover:text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md border border-black active:scale-90 duration-150"
-          >
-            Login
-          </Link>
-          <Link
-            to={'register'}
-            className="font-semibold bg-black text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md active:scale-90 duration-150"
-          >
-            Register
-          </Link>
-        </div>
+        {user ? (
+          <div className="navbar-end flex gap-4 ">
+            <button
+              onClick={handleSignOut}
+              className="ml-auto font-semibold hover:bg-black hover:text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md border border-black active:scale-90 duration-150"
+            >
+              Sign Out
+            </button>
+          </div>
+        ) : (
+          <div className="navbar-end flex gap-4 ">
+            <Link
+              to={'login'}
+              className="font-semibold hover:bg-black hover:text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md border border-black active:scale-90 duration-150"
+            >
+              Login
+            </Link>
+            <Link
+              to={'register'}
+              className="font-semibold bg-black text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md active:scale-90 duration-150"
+            >
+              Register
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
