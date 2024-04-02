@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import pImg from '../../assets/react.svg';
 import { Toaster } from 'react-hot-toast';
 import { Link, NavLink } from 'react-router-dom';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
