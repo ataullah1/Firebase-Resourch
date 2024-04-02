@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import pImg from '../../assets/react.svg';
 import { Toaster } from 'react-hot-toast';
 import { Link, NavLink } from 'react-router-dom';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
+import { ContextProvider } from '../../provider/AuthProvider';
 
 const Nav = () => {
+  const { user } = useContext(ContextProvider);
   const [view, setView] = useState(false);
   return (
     <div>
@@ -89,37 +91,36 @@ const Nav = () => {
             </NavLink>
           </ul>
         </div>
-        {/* {user ? (*/}
-        {/* <div className="navbar-end flex gap-4 ">
-          <img
-            onClick={() => setView(!view)}
-            src={pImg}
-            className="border border-orange-400 rounded-full h-11 w-11 cursor-pointer p-1"
-            alt=""
-          />
-          {view && (
-            <div className="absolute top-16 lg:top-20 right-4">
-              <ProfileMenu />
-            </div>
-          )}
-        </div> */}
-
-        {/*  ) : ( */}
-        <div className="navbar-end gap-4 hidden sm:flex w-auto">
-          <Link
-            to={'login'}
-            className="font-semibold hover:bg-black hover:text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md border border-black active:scale-90 duration-150"
-          >
-            Login
-          </Link>
-          <Link
-            to={'register'}
-            className="font-semibold bg-black text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md active:scale-90 duration-150"
-          >
-            Register
-          </Link>
-        </div>
-        {/* )} */}
+        {user ? (
+          <div className="navbar-end flex gap-4 w-auto">
+            <img
+              onClick={() => setView(!view)}
+              src={pImg}
+              className="border border-orange-400 rounded-full h-11 w-11 cursor-pointer p-1"
+              alt=""
+            />
+            {view && (
+              <div className="absolute top-16 lg:top-20 right-4">
+                <ProfileMenu />
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="navbar-end gap-4 hidden sm:flex w-auto">
+            <Link
+              to={'login'}
+              className="font-semibold hover:bg-black hover:text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md border border-black active:scale-90 duration-150"
+            >
+              Login
+            </Link>
+            <Link
+              to={'register'}
+              className="font-semibold bg-black text-white px-5 sm:px-8 py-2 sm:py-3 rounded-md active:scale-90 duration-150"
+            >
+              Register
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

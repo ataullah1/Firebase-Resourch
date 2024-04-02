@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom';
 import pImg from '../../assets/react.svg';
+import { useContext } from 'react';
+import { ContextProvider } from '../../provider/AuthProvider';
 const ProfileMenu = () => {
+  const { logOut } = useContext(ContextProvider);
+  const logOutAcc = () => {
+    logOut()
+      .then(() => {
+        console.log('Sign-out successful');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
       <div className="border-2 bg-slate-500 text-white border-orange-400 rounded-md w-[300px] p-4">
@@ -39,7 +51,10 @@ const ProfileMenu = () => {
               Privecy policy
             </Link>
           </ul>
-          <button className="relative group w-full py-1.5 px-4 border-2 font-bold tracking-widest active:scale-95 duration-150 hover:border-purple-600 hover:text-purple-600 border-orange-400 rounded">
+          <button
+            onClick={logOutAcc}
+            className="relative group w-full py-1.5 px-4 border-2 font-bold tracking-widest active:scale-95 duration-150 hover:border-purple-600 hover:text-purple-600 border-orange-400 rounded"
+          >
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 group-hover:w-full group-hover:transition-all"></span>
             Log out
           </button>

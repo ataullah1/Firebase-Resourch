@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   FaEye,
@@ -9,18 +9,30 @@ import {
 } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
+import { ContextProvider } from '../../provider/AuthProvider';
 
 const Register = () => {
-  const [eye, setEye] = useState(false);
+  const { googleRegister } = useContext(ContextProvider);
 
+  const handleGoogle = () => {
+    googleRegister()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [eye, setEye] = useState(false);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
-  console.log(errors);
-
+  // console.log(errors);
   return (
     <div className="min-h-[calc(100vh-92px)] flex items-center justify-center">
       <div className="border-2 my-7 border-orange-400 rounded-md p-8 bg-gradient-to-r from-emerald-400 to-cyan-400 w-full lg:w-2/3">
@@ -105,7 +117,10 @@ const Register = () => {
         </p>
         <div className="divider divider-error">Or</div>
         <div className="flex items-center justify-center gap-4 text-3xl pt-4">
-          <button className="hover:scale-125 duration-200 border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+          <button
+            onClick={handleGoogle}
+            className="hover:scale-125 duration-200 border-2 border-orange-500 rounded-full p-1 bg-gray-300"
+          >
             <FcGoogle />
           </button>
           <button className="hover:scale-125 duration-200 border-2 border-orange-500 rounded-full p-1 bg-gray-300">
