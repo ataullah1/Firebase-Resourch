@@ -96,6 +96,8 @@ const Register = () => {
             Login
           </Link>
         </p>
+
+        <div className="divider divider-error">Secondary</div>
       </div>
     </div>
   );
