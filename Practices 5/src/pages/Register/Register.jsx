@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import {
+  FaEye,
+  FaEyeSlash,
+  FaFacebook,
+  FaGithub,
+  FaTwitter,
+} from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
@@ -16,7 +23,7 @@ const Register = () => {
 
   return (
     <div className="min-h-[calc(100vh-92px)] flex items-center justify-center">
-      <div className="border-2 border-orange-400 rounded-md p-8 bg-gradient-to-r from-emerald-400 to-cyan-400 w-full lg:w-2/3">
+      <div className="border-2 my-7 border-orange-400 rounded-md p-8 bg-gradient-to-r from-emerald-400 to-cyan-400 w-full lg:w-2/3">
         <h1 className="font-bold text-center text-3xl lg:text-6xl">
           Create Account
         </h1>
@@ -96,8 +103,21 @@ const Register = () => {
             Login
           </Link>
         </p>
-
-        <div className="divider divider-error">Secondary</div>
+        <div className="divider divider-error">Or</div>
+        <div className="flex items-center justify-center gap-4 text-3xl pt-4">
+          <button className="hover:scale-125 duration-200 border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+            <FcGoogle />
+          </button>
+          <button className="hover:scale-125 duration-200 border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+            <FaGithub />
+          </button>
+          <button className="hover:scale-125 duration-200 text-[#1877F2] border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+            <FaFacebook />
+          </button>
+          <button className="hover:scale-125 duration-200 text-[#1DA1F2] border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+            <FaTwitter />
+          </button>
+        </div>
       </div>
     </div>
   );

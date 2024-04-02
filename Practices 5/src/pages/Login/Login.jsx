@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import {
+  FaEye,
+  FaEyeSlash,
+  FaFacebook,
+  FaGithub,
+  FaTwitter,
+} from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
   const [eye, setEye] = useState(false);
@@ -16,7 +23,7 @@ const Login = () => {
 
   return (
     <div className="min-h-[calc(100vh-92px)] flex items-center justify-center">
-      <div className="border-2 border-orange-400 rounded-md p-8 bg-gradient-to-r from-teal-400 to-yellow-200">
+      <div className="w-full lg:w-3/5 my-6 mb-10 border-2 border-orange-400 rounded-md p-8 bg-gradient-to-r from-teal-400 to-yellow-200">
         <h1 className="font-bold text-center text-3xl lg:text-6xl">
           Login Account
         </h1>
@@ -53,7 +60,8 @@ const Login = () => {
           </div>
           <div className="flex justify-between items-center">
             <div>
-              <input type="checkbox" /> <label>Remember me</label>
+              <input type="checkbox" className="cursor-pointer" />{' '}
+              <label>Remember me</label>
             </div>
             <p className="underline cursor-pointer">Forgot Password</p>
           </div>
@@ -68,6 +76,21 @@ const Login = () => {
             Create Account
           </Link>
         </p>
+        <div className="divider divider-error">Or</div>
+        <div className="flex items-center justify-center gap-4 text-3xl pt-4">
+          <button className="hover:scale-125 duration-200 border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+            <FcGoogle />
+          </button>
+          <button className="hover:scale-125 duration-200 border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+            <FaGithub />
+          </button>
+          <button className="hover:scale-125 duration-200 text-[#1877F2] border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+            <FaFacebook />
+          </button>
+          <button className="hover:scale-125 duration-200 text-[#1DA1F2] border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+            <FaTwitter />
+          </button>
+        </div>
       </div>
     </div>
   );
