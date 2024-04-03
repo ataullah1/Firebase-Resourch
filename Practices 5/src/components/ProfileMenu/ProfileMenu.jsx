@@ -23,7 +23,7 @@ const ProfileMenu = () => {
             className="h-16 w-16 border border-orange-400 p-2 rounded-full mx-auto"
           />
           <h2 className="text-2xl font-semibold text-center">
-            Md Ataullah Vay
+            {user.displayName}
           </h2>
           <div className="w-full text-center">
             <Link to={'profile'}>

@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from 'react';
 import {
+  FacebookAuthProvider,
+  GithubAuthProvider,
   GoogleAuthProvider,
+  TwitterAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
   signOut,
@@ -14,8 +17,24 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
 
   const googleProvider = new GoogleAuthProvider();
+  const gitHubProvider = new GithubAuthProvider();
+  const faceBookProvider = new FacebookAuthProvider();
+  const twitterProvider = new TwitterAuthProvider();
+
   const googleRegister = () => {
     return signInWithPopup(auth, googleProvider);
+  };
+
+  const gitHubRegister = () => {
+    return signInWithPopup(auth, gitHubProvider);
+  };
+
+  const fbRegister = () => {
+    return signInWithPopup(auth, faceBookProvider);
+  };
+
+  const xRegister = () => {
+    return signInWithPopup(auth, twitterProvider);
   };
 
   const logOut = () => {
@@ -30,7 +49,14 @@ const AuthProvider = ({ children }) => {
     return () => unSubscribe;
   }, []);
 
-  const authInfoProvider = { user, googleRegister, logOut };
+  const authInfoProvider = {
+    user,
+    googleRegister,
+    gitHubRegister,
+    fbRegister,
+    xRegister,
+    logOut,
+  };
   return (
     <ContextProvider.Provider value={authInfoProvider}>
       {children}

@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   FaEye,
   FaEyeSlash,
@@ -9,10 +9,66 @@ import {
   FaTwitter,
 } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import { ContextProvider } from '../../provider/AuthProvider';
 
 const Login = () => {
-  const [eye, setEye] = useState(false);
+  const { user, googleRegister, gitHubRegister, fbRegister, xRegister } =
+    useContext(ContextProvider);
 
+  // Handle Google Login
+  const handleGoogle = () => {
+    googleRegister()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // Handle GitHub Login
+  const handleGitHub = () => {
+    gitHubRegister()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // Handle Facebook Login
+  const handleFB = () => {
+    fbRegister()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // Handle Twitter Login
+  const handleX = () => {
+    xRegister()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // Naviget, login done then go to Home
+  const naviget = useNavigate();
+  useEffect(() => {
+    if (user) {
+      naviget('/');
+    }
+  }, [user, naviget]);
+
+  const [eye, setEye] = useState(false);
   const {
     register,
     handleSubmit,
@@ -78,16 +134,28 @@ const Login = () => {
         </p>
         <div className="divider divider-error">Or</div>
         <div className="flex items-center justify-center gap-4 text-3xl pt-4">
-          <button className="hover:scale-125 duration-200 border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+          <button
+            onClick={handleGoogle}
+            className="hover:scale-125 duration-200 border-2 border-orange-500 rounded-full p-1 bg-gray-300"
+          >
             <FcGoogle />
           </button>
-          <button className="hover:scale-125 duration-200 border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+          <button
+            onClick={handleGitHub}
+            className="hover:scale-125 duration-200 border-2 border-orange-500 rounded-full p-1 bg-gray-300"
+          >
             <FaGithub />
           </button>
-          <button className="hover:scale-125 duration-200 text-[#1877F2] border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+          <button
+            onClick={handleFB}
+            className="hover:scale-125 duration-200 text-[#1877F2] border-2 border-orange-500 rounded-full p-1 bg-gray-300"
+          >
             <FaFacebook />
           </button>
-          <button className="hover:scale-125 duration-200 text-[#1DA1F2] border-2 border-orange-500 rounded-full p-1 bg-gray-300">
+          <button
+            onClick={handleX}
+            className="hover:scale-125 duration-200 text-[#1DA1F2] border-2 border-orange-500 rounded-full p-1 bg-gray-300"
+          >
             <FaTwitter />
           </button>
         </div>
