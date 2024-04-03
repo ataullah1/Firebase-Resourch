@@ -8,7 +8,7 @@ const ProfileMenu = () => {
     logOut()
       .then(() => {
         console.log('Sign-out successful');
-        naviget('/');
+        naviget('/login');
       })
       .catch((err) => {
         console.log(err);
