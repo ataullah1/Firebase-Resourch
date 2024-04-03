@@ -81,6 +81,11 @@ const Register = () => {
     // formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
+    if (data.password !== data.confirmPassword) {
+      console.log('Sorry Your Password is not matched.');
+      return;
+    }
+
     emailPass(data.email, data.password)
       .then((result) => {
         const userDta = result.user;
@@ -111,8 +116,8 @@ const Register = () => {
             <input
               className="w-full py-2 px-4 border border-orange-400 rounded outline-none focus:border-purple-600 duration-150"
               type="text"
-              placeholder="Last Name"
-              {...register('lastName', { required: true, maxLength: 100 })}
+              placeholder="Last Name (Optional)"
+              {...register('lastName', { required: false, maxLength: 100 })}
             />
           </div>
           <div className="flex flex-col md:flex-row justify-between gap-4">
@@ -125,8 +130,8 @@ const Register = () => {
             <input
               className="w-full py-2 px-4 border border-orange-400 rounded outline-none focus:border-purple-600 duration-150"
               type="number"
-              placeholder="Number"
-              {...register('number', { required: true, maxLength: 100 })}
+              placeholder="Number (Optional)"
+              {...register('number', { required: false, maxLength: 100 })}
             />
           </div>
           <input
