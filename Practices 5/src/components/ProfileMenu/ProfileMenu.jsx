@@ -1,18 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { ContextProvider } from '../../provider/AuthProvider';
 const ProfileMenu = () => {
   const { user, logOut } = useContext(ContextProvider);
+  const naviget = useNavigate();
   const logOutAcc = () => {
     logOut()
       .then(() => {
         console.log('Sign-out successful');
+        naviget('/');
       })
       .catch((err) => {
         console.log(err);
       });
   };
   // console.log(user.photoURL);
+
   return (
     <div>
       <div className="border-2 bg-slate-500 text-white border-orange-400 rounded-md w-[300px] p-4">
@@ -44,7 +47,10 @@ const ProfileMenu = () => {
             >
               Home
             </Link>
-            <Link className="py-1.5 border rounded-md w-full px-3 hover:border-orange-400 duration-150">
+            <Link
+              to={'profile'}
+              className="py-1.5 border rounded-md w-full px-3 hover:border-orange-400 duration-150"
+            >
               Setting
             </Link>
             <Link className="py-1.5 border rounded-md w-full px-3 hover:border-orange-400 duration-150">

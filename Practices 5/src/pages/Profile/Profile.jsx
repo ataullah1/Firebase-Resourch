@@ -1,16 +1,19 @@
 import profileImg from '../../assets/mypic.png';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { ContextProvider } from '../../provider/AuthProvider';
 
 const Profile = () => {
-  const [user, setUser] = useState({
-    profileImage: 'https://via.placeholder.com/150', // Replace with actual image URL
-    username: '@JohnDoe123',
-    displayName: 'Md Ataaullah',
+  const { user } = useContext(ContextProvider);
+  const username = user.displayName;
+  const [userss, setUser] = useState({
+    profileImage: user.photoURL, // Replace with actual image URL
+    username: username.split(' ').join('').toLowerCase(),
+    displayName: user.displayName,
     about: 'Passionate developer. Coffee lover. 🚀',
     address: '123 Main Street, Cityville, Country',
-    email: 'john.doe@example.com',
-    phoneNumber: '+1 (555) 123-4567',
+    email: user.email,
+    phoneNumber: user.phoneNumber ? user.phoneNumber : '+1 (555) 123-4567',
     password: '', // Initialize with empty password
   });
 
@@ -25,7 +28,7 @@ const Profile = () => {
   // Handle password change
   const handlePasswordChange = () => {
     // Implement your password change logic here
-    console.log('New password:', user.password);
+    console.log('New password:', userss.password);
     // Reset the input field
     setUser((prevUser) => ({ ...prevUser, password: '' }));
   };
@@ -37,45 +40,49 @@ const Profile = () => {
         <img
           src={profileImg}
           alt="Profile"
-          className="w-20 h-20 rounded-full mx-auto mb-4"
+          className="w-20 h-20 rounded-full mx-auto"
         />
 
         {/* Username */}
-        <h2 className="text-xl font-semibold text-center">{user.username}</h2>
+        <h2 className="text-lg text-center">@{userss.username}</h2>
 
         {/* Display Name */}
-        <p className="text-gray-600 text-center">{user.displayName}</p>
+        <p className="text-gray-600 text-center text-2xl font-semibold">
+          {userss.displayName}
+        </p>
 
         {/* About */}
         {editMode ? (
           <textarea
-            value={user.about}
+            value={userss.about}
             onChange={(e) => handleInputChange('about', e.target.value)}
             className="mt-4 w-full p-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
           />
         ) : (
-          <p className="mt-4 text-center text-sm text-gray-500">{user.about}</p>
+          <p className="mt-4 text-center text-sm text-gray-500">
+            {userss.about}
+          </p>
         )}
 
         {/* Address */}
         {editMode ? (
           <input
             type="text"
-            value={user.address}
+            value={userss.address}
             onChange={(e) => handleInputChange('address', e.target.value)}
             className="mt-2 w-full p-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
           />
         ) : (
-          <p className="mt-4 text-center text-gray-600">{user.address}</p>
+          <p className="mt-4 text-center text-gray-600">{userss.address}</p>
         )}
 
         {/* Email */}
         <p className="mt-2 text-center text-blue-500 hover:underline">
-          {user.email}
+          {userss.email}
         </p>
 
         {/* Phone Number */}
-        <p className="mt-2 text-center text-gray-600">{user.phoneNumber}</p>
+        <p className="mt-2 text-center text-gray-600">{userss.phoneNumber}</p>
 
         {/* Edit and Save Buttons */}
         {editMode ? (
@@ -99,7 +106,7 @@ const Profile = () => {
           <input
             type="password"
             placeholder="New Password"
-            value={user.password}
+            value={userss.password}
             onChange={(e) => handleInputChange('password', e.target.value)}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
           />
