@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { Link, NavLink } from 'react-router-dom';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import { ContextProvider } from '../../provider/AuthProvider';
+import { IoMdClose } from 'react-icons/io';
 
 const Nav = () => {
   const { user } = useContext(ContextProvider);
@@ -98,11 +99,22 @@ const Nav = () => {
               className="border border-orange-400 rounded-full h-11 w-11 cursor-pointer p-1"
               alt=""
             />
-            {view && (
-              <div className="absolute top-16 lg:top-20 right-4">
+
+            <div
+              className={`absolute top-16 lg:top-20 right-3 duration-3000 transition-transform ${
+                view ? 'translate-x-0 visible' : 'translate-x-96 invisible'
+              }`}
+            >
+              <div className="relative">
+                <div
+                  className="text-white absolute text-2xl top-3 left-3 border rounded cursor-pointer hover:border-orange-400 duration-150"
+                  onClick={() => setView(!view)}
+                >
+                  <IoMdClose />
+                </div>
                 <ProfileMenu />
               </div>
-            )}
+            </div>
           </div>
         ) : (
           <div className="navbar-end gap-4 hidden sm:flex w-auto">

@@ -3,7 +3,7 @@ import Nav from '../components/Nav/Nav';
 
 const Root = () => {
   return (
-    <div className="w-11/12 mx-auto">
+    <div className="w-11/12 mx-auto relative overflow-x-hidden min-h-screen">
       <Nav />
       <Outlet />
     </div>

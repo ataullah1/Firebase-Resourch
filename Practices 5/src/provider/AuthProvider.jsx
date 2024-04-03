@@ -5,6 +5,7 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   TwitterAuthProvider,
+  createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithPopup,
   signOut,
@@ -37,6 +38,11 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, twitterProvider);
   };
 
+  // Email Password Login
+  const emailPass = (email, pass) => {
+    createUserWithEmailAndPassword(auth, email, pass);
+  };
+
   const logOut = () => {
     return signOut(auth);
   };
@@ -55,6 +61,7 @@ const AuthProvider = ({ children }) => {
     gitHubRegister,
     fbRegister,
     xRegister,
+    emailPass,
     logOut,
   };
   return (

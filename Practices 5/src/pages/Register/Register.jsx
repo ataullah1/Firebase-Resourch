@@ -12,8 +12,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../../provider/AuthProvider';
 
 const Register = () => {
-  const { user, googleRegister, gitHubRegister, fbRegister, xRegister } =
-    useContext(ContextProvider);
+  const {
+    user,
+    googleRegister,
+    gitHubRegister,
+    fbRegister,
+    xRegister,
+    emailPass,
+  } = useContext(ContextProvider);
 
   // Handle Google Login
   const handleGoogle = () => {
@@ -68,14 +74,25 @@ const Register = () => {
     }
   }, [user, naviget]);
 
-  
   const [eye, setEye] = useState(false);
   const {
     register,
     handleSubmit,
     // formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    emailPass(data.email, data.password)
+      .then((result) => {
+        const userDta = result.user;
+        console.log(userDta);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        // ..
+      });
+    // console.log(data);
+  };
   // console.log(errors);
   return (
     <div className="min-h-[calc(100vh-92px)] flex items-center justify-center">
@@ -89,13 +106,13 @@ const Register = () => {
               className="w-full py-2 px-4 border border-orange-400 rounded outline-none focus:border-purple-600 duration-150"
               type="text"
               placeholder="First Name"
-              {...register('First Name', { required: true, maxLength: 100 })}
+              {...register('firstName', { required: true, maxLength: 100 })}
             />
             <input
               className="w-full py-2 px-4 border border-orange-400 rounded outline-none focus:border-purple-600 duration-150"
               type="text"
               placeholder="Last Name"
-              {...register('Last Name', { required: true, maxLength: 100 })}
+              {...register('lastName', { required: true, maxLength: 100 })}
             />
           </div>
           <div className="flex flex-col md:flex-row justify-between gap-4">
@@ -109,14 +126,14 @@ const Register = () => {
               className="w-full py-2 px-4 border border-orange-400 rounded outline-none focus:border-purple-600 duration-150"
               type="number"
               placeholder="Number"
-              {...register('Number', { required: true, maxLength: 100 })}
+              {...register('number', { required: true, maxLength: 100 })}
             />
           </div>
           <input
             className="w-full py-2 px-4 border border-orange-400 rounded outline-none focus:border-purple-600 duration-150"
             type="email"
             placeholder="Email"
-            {...register('Email', { required: true, pattern: /^\S+@\S+$/i })}
+            {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
           />
           <div className="flex flex-col md:flex-row justify-between gap-4">
             <div className="w-full relative">
@@ -130,7 +147,7 @@ const Register = () => {
                 className="w-full py-2 px-4 border border-orange-400 rounded outline-none focus:border-purple-600 duration-150"
                 type={eye ? 'text' : 'password'}
                 placeholder="Password"
-                {...register('Password', {
+                {...register('password', {
                   required: true,
                   minLength: 6,
                   maxLength: 50,
@@ -141,7 +158,7 @@ const Register = () => {
               className="w-full py-2 px-4 border border-orange-400 rounded outline-none focus:border-purple-600 duration-150"
               type="password"
               placeholder="Confirm Password"
-              {...register('Confirm Password', {
+              {...register('confirmPassword', {
                 required: true,
                 minLength: 6,
                 maxLength: 50,
