@@ -4,11 +4,11 @@ const Header = () => {
   return (
     <div className="pt-5 sm:pt-8 space-y-1">
       <img src={logo} alt="" className="mx-auto" />
-      <p className="text-neutral-500 text-lg font-normal leading-[30px] text-center">
+      <p className="text-neutral-500 text-lg font-normal text-center">
         Journalism Without Fear or Favour
       </p>
 
-      <p className="text-xl font-medium leading-[30px]  text-center">
+      <p className="text-xl font-medium   text-center">
         <span className="text-neutral-700">{moment().format('dddd')},</span>
         <span className="text-neutral-500">
           {' '}
