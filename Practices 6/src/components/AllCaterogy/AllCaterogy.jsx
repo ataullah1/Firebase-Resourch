@@ -34,8 +34,8 @@ const AllCaterogy = () => {
         </div>
       </div>
 
-      <div>
-        <div className="space-y-2">
+      <div className="flex flex-col gap-7">
+        <div className="space-y-2 bg-white rounded-[5px] border border-neutral-200">
           <img
             className="w-full max-h-[150px] rounded-[5px]"
             src="https://via.placeholder.com/267x150"
@@ -52,7 +52,7 @@ const AllCaterogy = () => {
             </div>
           </div>
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 bg-white rounded-[5px] border border-neutral-200">
           <img
             className="w-full max-h-[150px] rounded-[5px]"
             src="https://via.placeholder.com/267x150"
@@ -69,7 +69,7 @@ const AllCaterogy = () => {
             </div>
           </div>
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 bg-white rounded-[5px] border border-neutral-200">
           <img
             className="w-full max-h-[150px] rounded-[5px]"
             src="https://via.placeholder.com/267x150"
