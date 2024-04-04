@@ -1,3 +1,7 @@
+import img1 from '../../assets/1.png';
+import img2 from '../../assets/2.png';
+import img3 from '../../assets/3.png';
+
 const AllCaterogy = () => {
   return (
     <div className="">
@@ -35,11 +39,8 @@ const AllCaterogy = () => {
       </div>
 
       <div className="flex flex-col gap-7">
-        <div className="space-y-2 bg-white rounded-[5px] border border-neutral-200">
-          <img
-            className="w-full max-h-[150px] rounded-[5px]"
-            src="https://via.placeholder.com/267x150"
-          />
+        <div className="space-y-2">
+          <img className="mx-auto max-h-[200px] rounded-[5px]" src={img1} />
           <div className="w-full text-neutral-700 text-xl font-semibold ">
             Bayern Slams Authorities Over Flight Delay to Club World Cup
           </div>
@@ -52,11 +53,8 @@ const AllCaterogy = () => {
             </div>
           </div>
         </div>
-        <div className="space-y-2 bg-white rounded-[5px] border border-neutral-200">
-          <img
-            className="w-full max-h-[150px] rounded-[5px]"
-            src="https://via.placeholder.com/267x150"
-          />
+        <div className="space-y-2">
+          <img className="mx-auto max-h-[200px] rounded-[5px]" src={img2} />
           <div className="w-full text-neutral-700 text-xl font-semibold ">
             Bayern Slams Authorities Over Flight Delay to Club World Cup
           </div>
@@ -69,11 +67,8 @@ const AllCaterogy = () => {
             </div>
           </div>
         </div>
-        <div className="space-y-2 bg-white rounded-[5px] border border-neutral-200">
-          <img
-            className="w-full max-h-[150px] rounded-[5px]"
-            src="https://via.placeholder.com/267x150"
-          />
+        <div className="space-y-2">
+          <img className="mx-auto max-h-[200px] rounded-[5px]" src={img3} />
           <div className="w-full text-neutral-700 text-xl font-semibold ">
             Bayern Slams Authorities Over Flight Delay to Club World Cup
           </div>
