@@ -1,3 +1,6 @@
+import bannerIm1 from '../../assets/editorsInsight1.png';
+import bannerIm2 from '../../assets/editorsInsight2.png';
+import bannerIm3 from '../../assets/editorsInsight3.png';
 import { FaEye, FaRegBookmark, FaShareAlt, FaStar } from 'react-icons/fa';
 const DragonNews = () => {
   return (
@@ -34,7 +37,7 @@ const DragonNews = () => {
             </div>
             <img
               className="w-full max-h-[262px] mx-auto rounded-[5px]"
-              src="https://via.placeholder.com/518x262"
+              src={bannerIm1}
             />
             <p className="text-neutral-500 text-base font-normal leading-relaxed">
               Wednesday, August 24, 2022 | Tag Cloud Tags: Biden, EU, Euro,
@@ -96,7 +99,7 @@ const DragonNews = () => {
             </div>
             <img
               className="w-full max-h-[262px] mx-auto rounded-[5px]"
-              src="https://via.placeholder.com/518x262"
+              src={bannerIm2}
             />
             <p className="text-neutral-500 text-base font-normal leading-relaxed">
               Wednesday, August 24, 2022 | Tag Cloud Tags: Biden, EU, Euro,
@@ -158,7 +161,7 @@ const DragonNews = () => {
             </div>
             <img
               className="w-full max-h-[262px] mx-auto rounded-[5px]"
-              src="https://via.placeholder.com/518x262"
+              src={bannerIm3}
             />
             <p className="text-neutral-500 text-base font-normal leading-relaxed">
               Wednesday, August 24, 2022 | Tag Cloud Tags: Biden, EU, Euro,
