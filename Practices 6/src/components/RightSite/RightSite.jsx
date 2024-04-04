@@ -1,3 +1,7 @@
+import rightSiteImg1 from '../../assets/qZone1.png';
+import rightSiteImg2 from '../../assets/qZone2.png';
+import rightSiteImg3 from '../../assets/qZone3.png';
+
 import {
   FaFacebookF,
   FaGithub,
@@ -44,9 +48,41 @@ const RightSite = () => {
             Instagram
           </button>
         </div>
-        <div className="w-full bg-zinc-100 space-y-7">
-          <h2 className="text-neutral-700 text-xl font-semibold"> Q-Zone</h2>
-          <div className="w-full bg-white rounded border border-neutral-200">
+        <div className="w-full bg-zinc-100 mt-6">
+          <h2 className="text-neutral-700 text-xl font-semibold p-4">
+            {' '}
+            Q-Zone
+          </h2>
+          <div className="py-4 space-y-5">
+            <div className="w-full">
+              <img
+                className="mx-auto max-h-[200px] rounded-[5px]"
+                src={rightSiteImg1}
+              />
+              {/* <h2 className="text-center text-neutral-700 text-base font-semibold py-2">
+              Swimming
+            </h2> */}
+            </div>
+            <div className="w-full">
+              <img
+                className="mx-auto max-h-[200px] rounded-[5px]"
+                src={rightSiteImg2}
+              />
+              {/* <h2 className="text-center text-neutral-700 text-base font-semibold py-2">
+              Swimming
+            </h2> */}
+            </div>
+            <div className="w-full">
+              <img
+                className="mx-auto max-h-[200px] rounded-[5px]"
+                src={rightSiteImg3}
+              />
+              {/* <h2 className="text-center text-neutral-700 text-base font-semibold py-2">
+              Swimming
+            </h2> */}
+            </div>
+          </div>
+          {/* <div className="w-full bg-white rounded border border-neutral-200">
             <img
               className="w-full max-h-[129px] rounded-[5px]"
               src="https://via.placeholder.com/212x129"
@@ -63,16 +99,7 @@ const RightSite = () => {
             <h2 className="text-center text-neutral-700 text-base font-semibold py-2">
               Swimming
             </h2>
-          </div>
-          <div className="w-full bg-white rounded border border-neutral-200">
-            <img
-              className="w-full max-h-[129px] rounded-[5px]"
-              src="https://via.placeholder.com/212x129"
-            />
-            <h2 className="text-center text-neutral-700 text-base font-semibold py-2">
-              Swimming
-            </h2>
-          </div>
+          </div> */}
         </div>
         <div className="w-full text-center mt-7 space-y-5 py-16 bg-slate-950 bg-opacity-80">
           <h1 className=" text-center text-white text-3xl font-bold  leading-[45px]">
