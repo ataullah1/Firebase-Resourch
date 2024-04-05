@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
   FaEye,
   FaEyeSlash,
@@ -11,14 +11,19 @@ import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { TbPasswordFingerprint } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
-import imageSignUp from '../../assets/signup.jpg';
 import { FcGoogle } from 'react-icons/fc';
 import Nav from '../../components/Nav/Nav';
+import imageSignUp from '../../assets/signup.jpg';
+import { ContextAuth } from '../../provider/Provider';
+import auth from '../../firebase/firebase.config';
 const Register = () => {
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [emailErr, setEmailErr] = useState(null);
   const [passErr, setPassErr] = useState(null);
+
+  const { emailPass } = useContext(ContextAuth);
+
   const handleSignUpSubmit = (e) => {
     setEmailErr(null);
     setPassErr(null);
@@ -29,7 +34,7 @@ const Register = () => {
     const email = formDta.get('email');
     const pass = formDta.get('password');
     const confPass = formDta.get('confirmPass');
-    console.log(name, photo, email, pass, confPass);
+    // console.log(name, photo, email, pass, confPass);
 
     if (!isValidEmail.test(email)) {
       setEmailErr('Please enter a valid email address.');
@@ -38,6 +43,13 @@ const Register = () => {
       setPassErr('Password is not matched.');
       return;
     }
+    emailPass(email, pass)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   return (
