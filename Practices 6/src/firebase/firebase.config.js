@@ -6,12 +6,12 @@ import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyCLVtEaMvrzWdePGCwdpl-aRqeghlOxZ-Q',
-  authDomain: 'snowy-news.firebaseapp.com',
-  projectId: 'snowy-news',
-  storageBucket: 'snowy-news.appspot.com',
-  messagingSenderId: '115359984307',
-  appId: '1:115359984307:web:a0a6169e39311714931ec6',
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID,
 };
 
 // Initialize Firebase
