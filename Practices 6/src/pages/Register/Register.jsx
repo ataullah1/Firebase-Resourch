@@ -4,12 +4,15 @@ import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { TbPasswordFingerprint } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
+import imageLogin from '../../assets/Login.jpg';
 const Register = () => {
   const [eye, setEye] = useState(false);
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
-      <div className="flex flex-col md:flex-row items-center w-full gap-5">
-        <div className="w-full md:w-1/2 bg-red-200 h-44 "></div>
+      <div className="flex flex-col md:flex-row-reverse items-center w-full gap-5 border-2 rounded-lg border-secondary min-h-[450px] p-10 mt-8">
+        <div className="w-full md:w-1/2 h-[450px] flex justify-center items-center">
+          <img src={imageLogin} alt="" className="max-h-full mx-auto" />
+        </div>
         <div className="w-full md:w-1/2 mx-auto border-2 rounded-lg p-5">
           <h1 className="text-3xl font-bold pb-6">Create an account</h1>
           <form className="space-y-4">
