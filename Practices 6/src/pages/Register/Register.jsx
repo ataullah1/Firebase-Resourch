@@ -1,10 +1,18 @@
 import { useState } from 'react';
-import { FaEye, FaEyeSlash, FaImage, FaUserAlt } from 'react-icons/fa';
+import {
+  FaEye,
+  FaEyeSlash,
+  FaFacebook,
+  FaImage,
+  FaTwitter,
+  FaUserAlt,
+} from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { TbPasswordFingerprint } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import imageSignUp from '../../assets/signup.jpg';
+import { FcGoogle } from 'react-icons/fc';
 const Register = () => {
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -127,6 +135,27 @@ const Register = () => {
               Login
             </Link>
           </p>
+          <div className="divider divider-secondary">Or</div>
+          <div className="flex flex-col gap-2">
+            <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-indigo-900/20 rounded-md flex items-center justify-center gap-2 bg-white">
+              <span>
+                <FcGoogle />
+              </span>
+              Login With Google
+            </button>
+            <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-500/20 rounded-md  flex items-center justify-center gap-2">
+              <span className="text-blue-500">
+                <FaFacebook />
+              </span>
+              Login With Facebook
+            </button>
+            <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-400-900/20 rounded-md  flex items-center justify-center gap-2">
+              <span className="text-blue-400">
+                <FaTwitter />
+              </span>
+              Login With Twitter
+            </button>
+          </div>
         </div>
       </div>
     </div>
