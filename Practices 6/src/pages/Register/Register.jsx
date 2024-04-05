@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   FaEye,
   FaEyeSlash,
@@ -10,7 +10,7 @@ import {
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { TbPasswordFingerprint } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import Nav from '../../components/Nav/Nav';
 import imageSignUp from '../../assets/signup.jpg';
@@ -22,7 +22,8 @@ const Register = () => {
   const [emailErr, setEmailErr] = useState(null);
   const [passErr, setPassErr] = useState(null);
 
-  const { loding, emailPass } = useContext(ContextAuth);
+  const { loding, emailPass, twitterLogin, fbLogin, googleLogin, userDta } =
+    useContext(ContextAuth);
 
   const handleSignUpSubmit = (e) => {
     setEmailErr(null);
@@ -51,6 +52,41 @@ const Register = () => {
         console.log(err.message);
       });
   };
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        console.log('Succes login', result.user);
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+      });
+  };
+  const handleFbLogin = () => {
+    fbLogin()
+      .then((result) => {
+        console.log('Succes login', result.user);
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+      });
+  };
+  const handleTwitterLogin = () => {
+    twitterLogin()
+      .then((result) => {
+        console.log('Succes login', result.user);
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+      });
+  };
+  // Naviget, login done then go to Home
+  const naviget = useNavigate();
+  useEffect(() => {
+    if (userDta) {
+      naviget('/');
+    }
+  }, [userDta, naviget]);
+
   if (loding) {
     return <Loding />;
   }
@@ -154,19 +190,28 @@ const Register = () => {
             </p>
             <div className="divider divider-secondary">Or</div>
             <div className="flex flex-col gap-2">
-              <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-indigo-900/20 rounded-md flex items-center justify-center gap-2 bg-white">
+              <button
+                onClick={handleGoogleLogin}
+                className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-indigo-900/20 rounded-md flex items-center justify-center gap-2 bg-white"
+              >
                 <span>
                   <FcGoogle />
                 </span>
                 Login With Google
               </button>
-              <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-500/20 rounded-md  flex items-center justify-center gap-2">
+              <button
+                onClick={handleFbLogin}
+                className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-500/20 rounded-md  flex items-center justify-center gap-2"
+              >
                 <span className="text-blue-500">
                   <FaFacebook />
                 </span>
                 Login With Facebook
               </button>
-              <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-400-900/20 rounded-md  flex items-center justify-center gap-2">
+              <button
+                onClick={handleTwitterLogin}
+                className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-400-900/20 rounded-md  flex items-center justify-center gap-2"
+              >
                 <span className="text-blue-400">
                   <FaTwitter />
                 </span>
