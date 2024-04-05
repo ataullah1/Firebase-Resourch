@@ -7,6 +7,30 @@ import { Link } from 'react-router-dom';
 import imageSignUp from '../../assets/signup.jpg';
 const Register = () => {
   const [eye, setEye] = useState(false);
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const [emailErr, setEmailErr] = useState(null);
+  const [passErr, setPassErr] = useState(null);
+  const handleSignUpSubmit = (e) => {
+    setEmailErr(null);
+    setPassErr(null);
+    e.preventDefault();
+    const formDta = new FormData(e.currentTarget);
+    const name = formDta.get('name');
+    const photo = formDta.get('img');
+    const email = formDta.get('email');
+    const pass = formDta.get('password');
+    const confPass = formDta.get('confirmPass');
+    console.log(name, photo, email, pass, confPass);
+
+    if (!isValidEmail.test(email)) {
+      setEmailErr('Please enter a valid email address.');
+      return;
+    } else if (pass !== confPass) {
+      setPassErr('Password is not matched.');
+      return;
+    }
+  };
+
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
       <div className="flex flex-col md:flex-row-reverse items-center w-full gap-5 border-2 rounded-lg border-secondary min-h-[450px] md:p-10 mt-8">
@@ -15,32 +39,52 @@ const Register = () => {
         </div>
         <div className="w-full md:w-1/2 mx-auto border-2 rounded-lg p-5">
           <h1 className="text-3xl font-bold pb-6">Create an account</h1>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSignUpSubmit}>
             <label className="input input-bordered flex items-center gap-2">
               <FaUserAlt />
-              <input type="text" className="grow" placeholder="Your Name" />
+              <input
+                type="text"
+                name="name"
+                className="grow"
+                placeholder="Your Name"
+              />
             </label>
             <label className="input input-bordered flex items-center gap-2">
               <FaImage />
               <input
                 type="text"
                 className="grow"
+                name="img"
                 placeholder="Your Image URL"
               />
             </label>
-            <label className="input input-bordered flex items-center gap-2">
-              <FaUserAlt />
-              <input type="text" className="grow" placeholder="Your Name" />
-            </label>
-            <label className="input input-bordered flex items-center gap-2">
-              <MdEmail />
-              <input type="email" className="grow" placeholder="Email" />
-            </label>
+            <div>
+              <label
+                className={
+                  emailErr
+                    ? 'input input-bordered flex items-center gap-2 border-red-500'
+                    : 'input input-bordered flex items-center gap-2'
+                }
+              >
+                <MdEmail />
+                <input
+                  type="email"
+                  name="email"
+                  className="grow"
+                  placeholder="Email"
+                />
+              </label>
+              {emailErr && (
+                <p className="text-sm text-red-500 italic">{emailErr}</p>
+              )}
+            </div>
             <label className="relative input input-bordered flex items-center gap-2">
               <RiLockPasswordFill />
               <input
                 type={eye ? 'text' : 'password'}
+                name="password"
                 className="grow"
+                required
                 placeholder="Password"
               />
               <div
@@ -50,14 +94,27 @@ const Register = () => {
                 {eye ? <FaEyeSlash /> : <FaEye />}
               </div>
             </label>
-            <label className="input input-bordered flex items-center gap-2">
-              <TbPasswordFingerprint />
-              <input
-                type="password"
-                className="grow"
-                placeholder="Confirm Password"
-              />
-            </label>
+            <div>
+              <label
+                className={
+                  passErr
+                    ? 'input input-bordered flex items-center gap-2 border-red-500'
+                    : 'input input-bordered flex items-center gap-2'
+                }
+              >
+                <TbPasswordFingerprint />
+                <input
+                  type="password"
+                  className="grow"
+                  name="confirmPass"
+                  placeholder="Confirm Password"
+                />
+              </label>
+              {passErr && (
+                <p className="text-sm text-red-500 italic">{passErr}</p>
+              )}
+            </div>
+
             <input
               type="submit"
               value="Register"

@@ -6,6 +6,23 @@ import { Link } from 'react-router-dom';
 import imageLogin from '../../assets/Login.jpg';
 const Login = () => {
   const [eye, setEye] = useState(false);
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const [emailErr, setEmailErr] = useState(null);
+
+  const handleLoginSubmit = (e) => {
+    setEmailErr(null);
+    e.preventDefault();
+    const formDta = new FormData(e.currentTarget);
+    const email = formDta.get('email');
+    const pass = formDta.get('password');
+    console.log(email, pass);
+
+    if (!isValidEmail.test(email)) {
+      setEmailErr('Please enter a valid email address.');
+      return;
+    }
+  };
+
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
       <div className="flex flex-col md:flex-row-reverse items-center w-full gap-5 border-2 rounded-lg border-primary min-h-[450px] md:p-10 mt-8">
@@ -14,16 +31,34 @@ const Login = () => {
         </div>
         <div className="w-full md:w-1/2 mx-auto border-2 rounded-lg p-5">
           <h1 className="text-3xl font-bold pb-6">Login Your Account</h1>
-          <form className="space-y-6">
-            <label className="input input-bordered flex items-center gap-2">
-              <MdEmail />
-              <input type="email" className="grow" placeholder="Email" />
-            </label>
+          <form className="space-y-6" onSubmit={handleLoginSubmit}>
+            <div>
+              <label
+                className={
+                  emailErr
+                    ? 'input input-bordered flex items-center gap-2 border-red-500'
+                    : 'input input-bordered flex items-center gap-2'
+                }
+              >
+                <MdEmail />
+                <input
+                  type="email"
+                  name="email"
+                  className="grow"
+                  placeholder="Email"
+                />
+              </label>
+              {emailErr && (
+                <p className="text-sm text-red-500 italic">{emailErr}</p>
+              )}
+            </div>
             <label className="relative input input-bordered flex items-center gap-2">
               <RiLockPasswordFill />
               <input
                 type={eye ? 'text' : 'password'}
                 className="grow"
+                name="password"
+                required
                 placeholder="Password"
               />
               <div
