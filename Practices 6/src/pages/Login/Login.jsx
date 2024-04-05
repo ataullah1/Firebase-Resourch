@@ -83,7 +83,7 @@ const Login = () => {
     <div>
       <Nav />
       <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
-        <div className="flex flex-col md:flex-row-reverse items-center w-full gap-5 border-2 rounded-lg border-primary min-h-[450px] md:p-10 mt-8">
+        <div className="flex flex-col md:flex-row items-center w-full gap-5 border-2 rounded-lg border-primary min-h-[450px] md:p-10 mt-8">
           <div className="w-full md:w-1/2 h-[300px] md:h-[450px] flex justify-center items-center">
             <img src={imageLogin} alt="" className="max-h-full mx-auto" />
           </div>

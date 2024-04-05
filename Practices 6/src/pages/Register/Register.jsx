@@ -22,9 +22,22 @@ const Register = () => {
   const [emailErr, setEmailErr] = useState(null);
   const [passErr, setPassErr] = useState(null);
 
-  const { loding, emailPass, twitterLogin, fbLogin, googleLogin, userDta } =
-    useContext(ContextAuth);
-
+  const {
+    logout,
+    loding,
+    emailPass,
+    twitterLogin,
+    fbLogin,
+    googleLogin,
+    userDta,
+  } = useContext(ContextAuth);
+  // Naviget, login done then go to Home
+  const naviget = useNavigate();
+  useEffect(() => {
+    if (userDta) {
+      naviget('/');
+    }
+  }, [userDta, naviget]);
   const handleSignUpSubmit = (e) => {
     setEmailErr(null);
     setPassErr(null);
@@ -47,6 +60,9 @@ const Register = () => {
     emailPass(email, pass)
       .then((result) => {
         console.log(result.user);
+        logout().then(() => {
+          naviget('/login');
+        });
       })
       .catch((err) => {
         console.log(err.message);
@@ -79,13 +95,6 @@ const Register = () => {
         console.log('UnSucces login', err.message);
       });
   };
-  // Naviget, login done then go to Home
-  const naviget = useNavigate();
-  useEffect(() => {
-    if (userDta) {
-      naviget('/');
-    }
-  }, [userDta, naviget]);
 
   if (loding) {
     return <Loding />;
