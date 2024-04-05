@@ -4,14 +4,14 @@ import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { TbPasswordFingerprint } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
-import imageLogin from '../../assets/Login.jpg';
+import imageSignUp from '../../assets/signup.jpg';
 const Register = () => {
   const [eye, setEye] = useState(false);
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
-      <div className="flex flex-col md:flex-row-reverse items-center w-full gap-5 border-2 rounded-lg border-secondary min-h-[450px] p-10 mt-8">
-        <div className="w-full md:w-1/2 h-[450px] flex justify-center items-center">
-          <img src={imageLogin} alt="" className="max-h-full mx-auto" />
+      <div className="flex flex-col md:flex-row-reverse items-center w-full gap-5 border-2 rounded-lg border-secondary min-h-[450px] md:p-10 mt-8">
+        <div className="w-full md:w-1/2 h-[300px] md:h-[450px] flex justify-center items-center">
+          <img src={imageSignUp} alt="" className="max-h-full mx-auto" />
         </div>
         <div className="w-full md:w-1/2 mx-auto border-2 rounded-lg p-5">
           <h1 className="text-3xl font-bold pb-6">Create an account</h1>
@@ -36,7 +36,7 @@ const Register = () => {
               <MdEmail />
               <input type="email" className="grow" placeholder="Email" />
             </label>
-            <label className="input input-bordered flex items-center gap-2">
+            <label className="relative input input-bordered flex items-center gap-2">
               <RiLockPasswordFill />
               <input
                 type={eye ? 'text' : 'password'}
@@ -45,7 +45,7 @@ const Register = () => {
               />
               <div
                 onClick={() => setEye(!eye)}
-                className="cursor-pointer text-xl"
+                className="cursor-pointer text-xl absolute right-3"
               >
                 {eye ? <FaEyeSlash /> : <FaEye />}
               </div>
