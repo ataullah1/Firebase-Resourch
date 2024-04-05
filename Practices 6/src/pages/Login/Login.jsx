@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaFacebook, FaTwitter } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
@@ -86,7 +87,28 @@ const Login = () => {
             <Link to={'/register'} className="underline">
               Create Account
             </Link>
-          </p>
+          </p>{' '}
+          <div className="divider divider-primary">Or</div>
+          <div className="flex flex-col gap-2">
+            <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-indigo-900/20 rounded-md flex items-center justify-center gap-2 bg-white">
+              <span>
+                <FcGoogle />
+              </span>
+              Login With Google
+            </button>
+            <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-500/20 rounded-md  flex items-center justify-center gap-2">
+              <span className="text-blue-500">
+                <FaFacebook />
+              </span>
+              Login With Facebook
+            </button>
+            <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-400-900/20 rounded-md  flex items-center justify-center gap-2">
+              <span className="text-blue-400">
+                <FaTwitter />
+              </span>
+              Login With Twitter
+            </button>
+          </div>
         </div>
       </div>
     </div>
