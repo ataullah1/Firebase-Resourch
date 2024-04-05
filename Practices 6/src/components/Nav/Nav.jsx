@@ -50,7 +50,7 @@ const Nav = () => {
       </div>
       <div className="navbar-end flex gap-3 items-center">
         <img src={userPic} alt="" className="h-10 w-10" />
-        <Link>
+        <Link to={'/login'}>
           <button className="active:scale-90 duration-150 bg-neutral-700 hover:bg-white hover:text-neutral-700 border-2 border-neutral-700 text-white text-base md:text-xl font-semibold px-6 md:px-10 py-2">
             Login
           </button>
