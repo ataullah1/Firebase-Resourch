@@ -2,25 +2,23 @@ import rightSiteImg1 from '../../assets/qZone1.png';
 import rightSiteImg2 from '../../assets/qZone2.png';
 import rightSiteImg3 from '../../assets/qZone3.png';
 
-import {
-  FaFacebookF,
-  FaGithub,
-  FaGoogle,
-  FaInstagram,
-  FaTwitter,
-} from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 const RightSite = () => {
   return (
-    <div className="">
+    <div>
       <h1 className="text-neutral-700 text-xl font-semibold pb-5">
         Login With
       </h1>
       <div className="flex flex-col gap-2">
-        <button className="w-full rounded-md border-2 border-blue-400 bg-white text-blue-400 py-2 px-4 flex items-center gap-2 justify-center">
-          <FaGoogle /> Login With Google
+        <button className="w-full rounded-md border-2 border-black bg-white text-neutral-700 hover:border-blue-400 hover:text-blue-400 py-2 px-4 flex items-center gap-2 justify-center">
+          <FcGoogle /> Login With Google
         </button>
-        <button className="w-full rounded-md border-2 border-black bg-white text-neutral-700 py-2 px-4 flex items-center gap-2 justify-center">
-          <FaGithub /> Login With GitHub
+        <button className="w-full rounded-md border-2 border-black bg-white text-neutral-700 hover:border-blue-400 hover:text-blue-400 py-2 px-4 flex items-center gap-2 justify-center">
+          <span className="text-blue-400">
+            <FaTwitter />
+          </span>
+          Login With Twitter
         </button>
       </div>
 
