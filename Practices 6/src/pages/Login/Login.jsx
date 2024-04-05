@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash, FaFacebook, FaTwitter } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import imageLogin from '../../assets/Login.jpg';
 import Nav from '../../components/Nav/Nav';
+import { ContextAuth } from '../../provider/Provider';
 const Login = () => {
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [emailErr, setEmailErr] = useState(null);
+  const { userDta, emailPassLogin, twitterLogin, fbLogin, googleLogin } =
+    useContext(ContextAuth);
 
   const handleLoginSubmit = (e) => {
     setEmailErr(null);
@@ -23,7 +26,48 @@ const Login = () => {
       setEmailErr('Please enter a valid email address.');
       return;
     }
+    emailPassLogin(email, pass)
+      .then((result) => {
+        console.log('Succes login', result.user);
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+      });
   };
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        console.log('Succes login', result.user);
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+      });
+  };
+  const handleFbLogin = () => {
+    fbLogin()
+      .then((result) => {
+        console.log('Succes login', result.user);
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+      });
+  };
+  const handleTwitterLogin = () => {
+    twitterLogin()
+      .then((result) => {
+        console.log('Succes login', result.user);
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+      });
+  };
+  // Naviget, login done then go to Home
+  const naviget = useNavigate();
+  useEffect(() => {
+    if (userDta) {
+      naviget('/');
+    }
+  }, [userDta, naviget]);
 
   return (
     <div>
@@ -82,7 +126,7 @@ const Login = () => {
               <input
                 type="submit"
                 value="Login"
-                className="w-full py-2 px-4 rounded-md text-center text-white font-bold bg-primary active:scale-95 duration-150"
+                className="w-full py-2 px-4 rounded-md text-center text-white font-bold bg-primary active:scale-95 duration-150 cursor-pointer hover:bg-[#3b02ca]"
               />
             </form>{' '}
             <p className="pt-3">
@@ -93,19 +137,28 @@ const Login = () => {
             </p>{' '}
             <div className="divider divider-primary">Or</div>
             <div className="flex flex-col gap-2">
-              <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-indigo-900/20 rounded-md flex items-center justify-center gap-2 bg-white">
+              <button
+                onClick={handleGoogleLogin}
+                className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-indigo-900/20 rounded-md flex items-center justify-center gap-2 bg-white"
+              >
                 <span>
                   <FcGoogle />
                 </span>
                 Login With Google
               </button>
-              <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-500/20 rounded-md  flex items-center justify-center gap-2">
+              <button
+                onClick={handleFbLogin}
+                className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-500/20 rounded-md  flex items-center justify-center gap-2"
+              >
                 <span className="text-blue-500">
                   <FaFacebook />
                 </span>
                 Login With Facebook
               </button>
-              <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-400-900/20 rounded-md  flex items-center justify-center gap-2">
+              <button
+                onClick={handleTwitterLogin}
+                className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-400-900/20 rounded-md  flex items-center justify-center gap-2"
+              >
                 <span className="text-blue-400">
                   <FaTwitter />
                 </span>

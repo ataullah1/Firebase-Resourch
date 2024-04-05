@@ -15,7 +15,6 @@ import { FcGoogle } from 'react-icons/fc';
 import Nav from '../../components/Nav/Nav';
 import imageSignUp from '../../assets/signup.jpg';
 import { ContextAuth } from '../../provider/Provider';
-import auth from '../../firebase/firebase.config';
 const Register = () => {
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,8 +28,8 @@ const Register = () => {
     setPassErr(null);
     e.preventDefault();
     const formDta = new FormData(e.currentTarget);
-    const name = formDta.get('name');
-    const photo = formDta.get('img');
+    // const name = formDta.get('name');
+    // const photo = formDta.get('img');
     const email = formDta.get('email');
     const pass = formDta.get('password');
     const confPass = formDta.get('confirmPass');
@@ -141,7 +140,7 @@ const Register = () => {
               <input
                 type="submit"
                 value="Register"
-                className="w-full py-2 px-4 rounded-md text-center text-white font-bold bg-secondary"
+                className="w-full py-2 px-4 rounded-md text-center text-white font-bold bg-secondary active:scale-95 duration-150 cursor-pointer hover:bg-[#bb019c]"
               />
             </form>{' '}
             <p className="pt-2">

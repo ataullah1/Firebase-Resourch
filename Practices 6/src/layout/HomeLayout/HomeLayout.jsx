@@ -4,7 +4,7 @@ import RightSite from '../../components/RightSite/RightSite';
 
 const HomeLayout = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
+    <div className="mt-7 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
       <div className="col-span-1 w-full">
         <AllCaterogy />
       </div>

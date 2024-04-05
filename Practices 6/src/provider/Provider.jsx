@@ -1,6 +1,12 @@
 import {
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  TwitterAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
 } from 'firebase/auth';
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from 'react';
@@ -13,6 +19,29 @@ const Provider = ({ children }) => {
   const emailPass = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
+  const emailPassLogin = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const logout = () => {
+    return signOut(auth);
+  };
+
+  // Google Login
+  const GoogleProvider = new GoogleAuthProvider();
+  const googleLogin = () => {
+    return signInWithPopup(auth, GoogleProvider);
+  };
+  // Facebook Login
+  const FacebookProvider = new FacebookAuthProvider();
+  const fbLogin = () => {
+    return signInWithPopup(auth, FacebookProvider);
+  };
+  // Twitter Login
+  const TwitterProvider = new TwitterAuthProvider();
+  const twitterLogin = () => {
+    return signInWithPopup(auth, TwitterProvider);
+  };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -22,7 +51,15 @@ const Provider = ({ children }) => {
       unSubscribe();
     };
   }, []);
-  const authDta = { userDta, emailPass };
+  const authDta = {
+    userDta,
+    logout,
+    emailPass,
+    emailPassLogin,
+    googleLogin,
+    fbLogin,
+    twitterLogin,
+  };
   return (
     <ContextAuth.Provider value={authDta}>{children}</ContextAuth.Provider>
   );
