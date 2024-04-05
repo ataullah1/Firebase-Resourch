@@ -4,7 +4,6 @@ const News = ({ dta }) => {
   const {
     thumbnail_url,
     details,
-    image_url,
     author,
     title,
     total_view,
@@ -17,13 +16,15 @@ const News = ({ dta }) => {
         <div className="flex items-center gap-2">
           <img
             className="w-10 h-10 rounded-full cursor-pointer"
-            src={image_url}
+            src={author.img}
           />
           <div>
             <h2 className="text-neutral-700 text-base font-semibold">
-              Md Ataullah
+              {author.name}
             </h2>
-            <p className="text-neutral-500 text-sm font-normal">2022-08-21</p>
+            <p className="text-neutral-500 text-sm font-normal">
+              {author.published_date}
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-2 cursor-pointer">
@@ -33,15 +34,11 @@ const News = ({ dta }) => {
       </div>
       <div className="p-6 space-y-4">
         <div className="text-neutral-700 text-xl font-bold leading-[35px]">
-          Biden Pledges Nearly $3 Billion To Ukraine In Largest U.S. Military
-          Aid Package Yet
+          {title}
         </div>
         <img className="w-full mx-auto rounded-[5px]" src={thumbnail_url} />
         <p className="text-neutral-500 text-base font-normal leading-relaxed">
-          Wednesday, August 24, 2022 | Tag Cloud Tags: Biden, EU, Euro, Europe,
-          Joe Biden, Military, News, Russia, Security, UK, Ukraine, United
-          States, Worthy News (Worthy News) – U.S. President Joe Biden has
-          announced nearly $3 billion in new U.S. military a...
+          {details}
         </p>
         <a href="#" className="text-orange-400 text-base font-semibol">
           Read More
