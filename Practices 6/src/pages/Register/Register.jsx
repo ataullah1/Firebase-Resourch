@@ -15,13 +15,14 @@ import { FcGoogle } from 'react-icons/fc';
 import Nav from '../../components/Nav/Nav';
 import imageSignUp from '../../assets/signup.jpg';
 import { ContextAuth } from '../../provider/Provider';
+import Loding from '../Loding/Loding';
 const Register = () => {
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [emailErr, setEmailErr] = useState(null);
   const [passErr, setPassErr] = useState(null);
 
-  const { emailPass } = useContext(ContextAuth);
+  const { loding, emailPass } = useContext(ContextAuth);
 
   const handleSignUpSubmit = (e) => {
     setEmailErr(null);
@@ -50,7 +51,9 @@ const Register = () => {
         console.log(err.message);
       });
   };
-
+  if (loding) {
+    return <Loding />;
+  }
   return (
     <div className="">
       <Nav />

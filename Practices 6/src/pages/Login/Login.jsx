@@ -7,12 +7,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import imageLogin from '../../assets/Login.jpg';
 import Nav from '../../components/Nav/Nav';
 import { ContextAuth } from '../../provider/Provider';
+import Loding from '../Loding/Loding';
 const Login = () => {
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [emailErr, setEmailErr] = useState(null);
-  const { userDta, emailPassLogin, twitterLogin, fbLogin, googleLogin } =
-    useContext(ContextAuth);
+  const {
+    loding,
+    userDta,
+    emailPassLogin,
+    twitterLogin,
+    fbLogin,
+    googleLogin,
+  } = useContext(ContextAuth);
 
   const handleLoginSubmit = (e) => {
     setEmailErr(null);
@@ -69,6 +76,9 @@ const Login = () => {
     }
   }, [userDta, naviget]);
 
+  if (loding) {
+    return <Loding />;
+  }
   return (
     <div>
       <Nav />
