@@ -1,3 +1,4 @@
+import toast, { Toaster } from 'react-hot-toast';
 import { useContext, useEffect, useState } from 'react';
 import {
   FaEye,
@@ -23,6 +24,7 @@ const Register = () => {
   const [emailErr, setEmailErr] = useState(null);
   const [passErr, setPassErr] = useState(null);
   const [confPassErr, setConfPassErr] = useState(null);
+  const [loginErr, setLoginErr] = useState(false);
 
   const {
     logout,
@@ -76,6 +78,8 @@ const Register = () => {
       })
       .catch((err) => {
         console.log(err.message);
+        toast.error('Sorry This Email Already In Use.');
+        setLoginErr(true);
       });
   };
   // const handeleNameImg = () => {
@@ -88,13 +92,16 @@ const Register = () => {
   //     });
   // };
   console.log(imgNam);
+
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
         console.log('Succes login', result.user);
+        // toast.success('Successfully Login.');
       })
       .catch((err) => {
         console.log('UnSucces login', err.message);
+        setLoginErr(true);
       });
   };
   const handleFbLogin = () => {
@@ -104,6 +111,7 @@ const Register = () => {
       })
       .catch((err) => {
         console.log('UnSucces login', err.message);
+        setLoginErr(true);
       });
   };
   const handleTwitterLogin = () => {
@@ -113,14 +121,16 @@ const Register = () => {
       })
       .catch((err) => {
         console.log('UnSucces login', err.message);
+        setLoginErr(true);
       });
   };
 
-  if (loding) {
+  if (loding && !loginErr) {
     return <Loding />;
   }
   return (
     <div className="">
+      <Toaster />
       <Nav />
       <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
         <div className="flex flex-col md:flex-row-reverse items-center w-full gap-5 border-2 rounded-lg border-secondary min-h-[450px] md:p-10 mt-8">

@@ -8,10 +8,13 @@ import imageLogin from '../../assets/Login.jpg';
 import Nav from '../../components/Nav/Nav';
 import { ContextAuth } from '../../provider/Provider';
 import Loding from '../Loding/Loding';
+import toast, { Toaster } from 'react-hot-toast';
 const Login = () => {
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [emailErr, setEmailErr] = useState(null);
+  const [loginErr, setLoginErr] = useState(false);
+
   const {
     loding,
     userDta,
@@ -44,6 +47,8 @@ const Login = () => {
       })
       .catch((err) => {
         console.log('UnSucces login', err.message);
+        toast.error('Sorry Unsuccesfull Login.');
+        setLoginErr(false);
       });
   };
   const handleGoogleLogin = () => {
@@ -81,11 +86,12 @@ const Login = () => {
     }
   }, [userDta, naviget]);
 
-  if (loding) {
+  if (loding && !loginErr) {
     return <Loding />;
   }
   return (
     <div>
+      <Toaster />
       <Nav />
       <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
         <div className="flex flex-col md:flex-row items-center w-full gap-5 border-2 rounded-lg border-primary min-h-[450px] md:p-10 mt-8">
