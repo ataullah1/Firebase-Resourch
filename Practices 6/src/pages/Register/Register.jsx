@@ -19,8 +19,10 @@ import Loding from '../Loding/Loding';
 const Register = () => {
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const isValidPass = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
   const [emailErr, setEmailErr] = useState(null);
   const [passErr, setPassErr] = useState(null);
+  const [confPassErr, setConfPassErr] = useState(null);
 
   const {
     logout,
@@ -44,6 +46,7 @@ const Register = () => {
   const handleSignUpSubmit = (e) => {
     setEmailErr(null);
     setPassErr(null);
+    setConfPassErr(null);
     e.preventDefault();
     const formDta = new FormData(e.currentTarget);
     const name = formDta.get('name');
@@ -57,8 +60,11 @@ const Register = () => {
     if (!isValidEmail.test(email)) {
       setEmailErr('Please enter a valid email address.');
       return;
+    } else if (!isValidPass.test(pass)) {
+      setPassErr('Please input Uppercase, Number and at least 6 digits.');
+      return;
     } else if (pass !== confPass) {
-      setPassErr('Password is not matched.');
+      setConfPassErr('Password is not matched.');
       return;
     }
     emailPass(email, pass)
@@ -162,26 +168,37 @@ const Register = () => {
                   <p className="text-sm text-red-500 italic">{emailErr}</p>
                 )}
               </div>
-              <label className="relative input input-bordered flex items-center gap-2">
-                <RiLockPasswordFill />
-                <input
-                  type={eye ? 'text' : 'password'}
-                  name="password"
-                  className="grow"
-                  required
-                  placeholder="Password"
-                />
-                <div
-                  onClick={() => setEye(!eye)}
-                  className="cursor-pointer text-xl absolute right-3"
-                >
-                  {eye ? <FaEyeSlash /> : <FaEye />}
-                </div>
-              </label>
               <div>
                 <label
                   className={
                     passErr
+                      ? 'relative input input-bordered flex items-center gap-2 border-red-500'
+                      : 'relative input input-bordered flex items-center gap-2'
+                  }
+                >
+                  <RiLockPasswordFill />
+                  <input
+                    type={eye ? 'text' : 'password'}
+                    name="password"
+                    className="grow"
+                    required
+                    placeholder="Password"
+                  />
+                  <div
+                    onClick={() => setEye(!eye)}
+                    className="cursor-pointer text-xl absolute right-3"
+                  >
+                    {eye ? <FaEyeSlash /> : <FaEye />}
+                  </div>
+                </label>
+                {passErr && (
+                  <p className="text-sm text-red-500 italic">{passErr}</p>
+                )}
+              </div>
+              <div>
+                <label
+                  className={
+                    confPassErr
                       ? 'input input-bordered flex items-center gap-2 border-red-500'
                       : 'input input-bordered flex items-center gap-2'
                   }
@@ -194,8 +211,8 @@ const Register = () => {
                     placeholder="Confirm Password"
                   />
                 </label>
-                {passErr && (
-                  <p className="text-sm text-red-500 italic">{passErr}</p>
+                {confPassErr && (
+                  <p className="text-sm text-red-500 italic">{confPassErr}</p>
                 )}
               </div>
 
