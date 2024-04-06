@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash, FaFacebook, FaTwitter } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import imageLogin from '../../assets/Login.jpg';
 import Nav from '../../components/Nav/Nav';
 import { ContextAuth } from '../../provider/Provider';
@@ -20,6 +20,10 @@ const Login = () => {
     fbLogin,
     googleLogin,
   } = useContext(ContextAuth);
+  const location = useLocation();
+  const naviget = useNavigate();
+
+  // console.log(location);
 
   const handleLoginSubmit = (e) => {
     setEmailErr(null);
@@ -36,6 +40,7 @@ const Login = () => {
     emailPassLogin(email, pass)
       .then((result) => {
         console.log('Succes login', result.user);
+        naviget(location?.state ? location.state : '/');
       })
       .catch((err) => {
         console.log('UnSucces login', err.message);
@@ -68,8 +73,8 @@ const Login = () => {
         console.log('UnSucces login', err.message);
       });
   };
+
   // Naviget, login done then go to Home
-  const naviget = useNavigate();
   useEffect(() => {
     if (userDta) {
       naviget('/');

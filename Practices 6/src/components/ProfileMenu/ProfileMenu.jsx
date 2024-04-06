@@ -1,8 +1,9 @@
 import { useContext } from 'react';
+import userPic from '../../assets/user.png';
 import { Link } from 'react-router-dom';
 import { ContextAuth } from '../../provider/Provider';
 const ProfileMenu = () => {
-  const { logout } = useContext(ContextAuth);
+  const { logout, userDta } = useContext(ContextAuth);
 
   const logOutProfile = () => {
     logout()
@@ -19,13 +20,18 @@ const ProfileMenu = () => {
       <div className="border-2 bg-slate-500 text-white border-orange-400 rounded-md w-[300px] p-4">
         <div className="space-y-2">
           <img
-            src=""
+            src={userDta.photoURL ? userDta.photoURL : userPic}
             alt=""
             className="h-16 w-16 border border-orange-400 p-2 rounded-full mx-auto"
           />
-          <h2 className="text-2xl font-semibold text-center">
-            {'user.displayName'}
-          </h2>
+          <div>
+            <h2 className="text-2xl font-semibold text-center">
+              {userDta.displayName ? userDta.displayName : 'Your Name'}
+            </h2>
+            <p className="text-center text-sm text-white underline">
+              {userDta.email}
+            </p>
+          </div>
           <div className="w-full text-center">
             <Link to={'profile'}>
               <button className="border-2 border-orange-400 relative inline-flex items-center justify-start px-6 py-1.5 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group">

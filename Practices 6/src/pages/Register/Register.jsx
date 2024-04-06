@@ -26,6 +26,7 @@ const Register = () => {
     logout,
     loding,
     emailPass,
+    // namePhotoURL,
     twitterLogin,
     fbLogin,
     googleLogin,
@@ -38,13 +39,16 @@ const Register = () => {
       naviget('/');
     }
   }, [userDta, naviget]);
+
+  const [imgNam, setImgNam] = useState({});
   const handleSignUpSubmit = (e) => {
     setEmailErr(null);
     setPassErr(null);
     e.preventDefault();
     const formDta = new FormData(e.currentTarget);
-    // const name = formDta.get('name');
-    // const photo = formDta.get('img');
+    const name = formDta.get('name');
+    const photo = formDta.get('img');
+    setImgNam({ nam: name, pic: photo });
     const email = formDta.get('email');
     const pass = formDta.get('password');
     const confPass = formDta.get('confirmPass');
@@ -68,6 +72,16 @@ const Register = () => {
         console.log(err.message);
       });
   };
+  // const handeleNameImg = () => {
+  //   namePhotoURL(imgNam.nam, imgNam.pic)
+  //     .then(() => {
+  //       console.log('Succesfully UpdateImage');
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message, 'Sorry Not Update Image');
+  //     });
+  // };
+  console.log(imgNam);
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
@@ -186,6 +200,7 @@ const Register = () => {
               </div>
 
               <input
+                // onClick={handeleNameImg}
                 type="submit"
                 value="Register"
                 className="w-full py-2 px-4 rounded-md text-center text-white font-bold bg-secondary active:scale-95 duration-150 cursor-pointer hover:bg-[#bb019c]"

@@ -1,15 +1,11 @@
 import { PropTypes } from 'prop-types';
 import { FaEye, FaRegBookmark, FaShareAlt, FaStar } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 const News = ({ dta }) => {
-  const {
-    thumbnail_url,
-    details,
-    author,
-    title,
-    total_view,
-    rating,
-    _id,
-  } = dta;
+  const { _id, image_url, details, author, title, total_view, rating } = dta;
+
+  const detailsOfNews = details.slice(0, 200);
+  // console.log(de tailsOfNews);
   return (
     <div className="w-full bg-white rounded-[5px] border border-neutral-200 ">
       <div className="w-full py-3 px-6 bg-zinc-100 rounded-tl-[5px] rounded-tr-[5px] border border-zinc-100 flex items-center justify-between">
@@ -36,13 +32,16 @@ const News = ({ dta }) => {
         <div className="text-neutral-700 text-xl font-bold leading-[35px]">
           {title}
         </div>
-        <img className="w-full mx-auto rounded-[5px]" src={thumbnail_url} />
+        <img className="w-full mx-auto rounded-[5px]" src={image_url} />
         <p className="text-neutral-500 text-base font-normal leading-relaxed">
-          {details}
+          {detailsOfNews}...{' '}
+          <Link
+            to={`/news-details/${_id}`}
+            className="text-orange-400 text-base font-semibol"
+          >
+            Read More
+          </Link>
         </p>
-        <a href="#" className="text-orange-400 text-base font-semibol">
-          Read More
-        </a>
       </div>
       <div className="w-full h-[0px] border border-neutral-200"></div>
       <div className="p-5 flex items-center justify-between">
@@ -54,13 +53,15 @@ const News = ({ dta }) => {
             <FaStar />
             <FaStar />
           </span>
-          <span className="text-neutral-500 text-base font-medium">4.9</span>
+          <span className="text-neutral-500 text-base font-medium">
+            {rating.number}
+          </span>
         </div>
         <div className="flex items-center gap-1 text-neutral-500 text-base font-medium">
           <span>
             <FaEye />
           </span>
-          <span>499</span>
+          <span>{total_view}</span>
         </div>
       </div>
     </div>
