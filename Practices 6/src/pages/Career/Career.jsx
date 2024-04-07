@@ -1,7 +1,10 @@
+import Nav from '../../components/Nav/Nav';
+
 const Career = () => {
   return (
     <div>
-      <h1 className="text-6xl font-bold text-center py-3">
+      <Nav />
+      <h1 className="text-6xl font-bold text-center py-3 min-h-[78vh]">
         This is Career Section.
       </h1>
     </div>

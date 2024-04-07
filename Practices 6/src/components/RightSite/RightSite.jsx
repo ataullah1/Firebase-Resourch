@@ -55,12 +55,16 @@ const RightSite = () => {
           Find Us On
         </h2>
         <div>
-          <button className="flex gap-2 items-center px-4 py-2 border rounded-t-md w-full">
+          <a
+            href="https://www.facebook.com/ataullah0"
+            target="_blank"
+            className="flex gap-2 items-center px-4 py-2 border rounded-t-md w-full"
+          >
             <span className="text-indigo-800 bg-zinc-100 p-2 rounded-full">
               <FaFacebookF />
             </span>
             Facebook
-          </button>
+          </a>
           <button className="flex gap-2 items-center px-4 py-2 border w-full">
             <span className="text-blue-400 bg-zinc-100 p-2 rounded-full">
               <FaTwitter />
