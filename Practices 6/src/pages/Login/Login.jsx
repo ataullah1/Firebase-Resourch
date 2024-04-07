@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { FaEye, FaEyeSlash, FaFacebook, FaTwitter } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaFacebook, FaTwitter } from 're. act-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
