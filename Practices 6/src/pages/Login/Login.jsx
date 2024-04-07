@@ -3,15 +3,18 @@ import { FaEye, FaEyeSlash, FaFacebook, FaTwitter } from 're. act-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import imageLogin from '../../assets/Login.jpg';
 import Nav from '../../components/Nav/Nav';
 import { ContextAuth } from '../../provider/Provider';
 import Loding from '../Loding/Loding';
+import toast, { Toaster } from 'react-hot-toast';
 const Login = () => {
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [emailErr, setEmailErr] = useState(null);
+  const [loginErr, setLoginErr] = useState(false);
+
   const {
     loding,
     userDta,
@@ -20,6 +23,10 @@ const Login = () => {
     fbLogin,
     googleLogin,
   } = useContext(ContextAuth);
+  const location = useLocation();
+  const naviget = useNavigate();
+
+  // console.log(location);
 
   const handleLoginSubmit = (e) => {
     setEmailErr(null);
@@ -36,9 +43,12 @@ const Login = () => {
     emailPassLogin(email, pass)
       .then((result) => {
         console.log('Succes login', result.user);
+        naviget(location?.state ? location.state : '/');
       })
       .catch((err) => {
         console.log('UnSucces login', err.message);
+        toast.error('Sorry Unsuccesfull Login.');
+        setLoginErr(false);
       });
   };
   const handleGoogleLogin = () => {
@@ -68,22 +78,23 @@ const Login = () => {
         console.log('UnSucces login', err.message);
       });
   };
+
   // Naviget, login done then go to Home
-  const naviget = useNavigate();
   useEffect(() => {
     if (userDta) {
       naviget('/');
     }
   }, [userDta, naviget]);
 
-  if (loding) {
+  if (loding && !loginErr) {
     return <Loding />;
   }
   return (
     <div>
+      <Toaster />
       <Nav />
       <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
-        <div className="flex flex-col md:flex-row-reverse items-center w-full gap-5 border-2 rounded-lg border-primary min-h-[450px] md:p-10 mt-8">
+        <div className="flex flex-col md:flex-row items-center w-full gap-5 border-2 rounded-lg border-primary min-h-[450px] md:p-10 mt-8">
           <div className="w-full md:w-1/2 h-[300px] md:h-[450px] flex justify-center items-center">
             <img src={imageLogin} alt="" className="max-h-full mx-auto" />
           </div>

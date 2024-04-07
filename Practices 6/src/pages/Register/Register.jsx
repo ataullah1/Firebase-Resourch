@@ -1,4 +1,5 @@
-import { useContext, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { useContext, useEffect, useState } from 'react';
 import {
   FaEye,
   FaEyeSlash,
@@ -10,7 +11,7 @@ import {
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { TbPasswordFingerprint } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import Nav from '../../components/Nav/Nav';
 import imageSignUp from '../../assets/signup.jpg';
@@ -19,18 +20,40 @@ import Loding from '../Loding/Loding';
 const Register = () => {
   const [eye, setEye] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const isValidPass = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
   const [emailErr, setEmailErr] = useState(null);
   const [passErr, setPassErr] = useState(null);
+  const [confPassErr, setConfPassErr] = useState(null);
+  const [loginErr, setLoginErr] = useState(false);
 
-  const { loding, emailPass } = useContext(ContextAuth);
+  const {
+    logout,
+    loding,
+    emailPass,
+    // namePhotoURL,
+    twitterLogin,
+    fbLogin,
+    googleLogin,
+    userDta,
+  } = useContext(ContextAuth);
+  // Naviget, login done then go to Home
+  const naviget = useNavigate();
+  useEffect(() => {
+    if (userDta) {
+      naviget('/');
+    }
+  }, [userDta, naviget]);
 
+  const [imgNam, setImgNam] = useState({});
   const handleSignUpSubmit = (e) => {
     setEmailErr(null);
     setPassErr(null);
+    setConfPassErr(null);
     e.preventDefault();
     const formDta = new FormData(e.currentTarget);
-    // const name = formDta.get('name');
-    // const photo = formDta.get('img');
+    const name = formDta.get('name');
+    const photo = formDta.get('img');
+    setImgNam({ nam: name, pic: photo });
     const email = formDta.get('email');
     const pass = formDta.get('password');
     const confPass = formDta.get('confirmPass');
@@ -39,23 +62,75 @@ const Register = () => {
     if (!isValidEmail.test(email)) {
       setEmailErr('Please enter a valid email address.');
       return;
+    } else if (!isValidPass.test(pass)) {
+      setPassErr('Please input Uppercase, Number and at least 6 digits.');
+      return;
     } else if (pass !== confPass) {
-      setPassErr('Password is not matched.');
+      setConfPassErr('Password is not matched.');
       return;
     }
     emailPass(email, pass)
       .then((result) => {
         console.log(result.user);
+        logout().then(() => {
+          naviget('/login');
+        });
       })
       .catch((err) => {
         console.log(err.message);
+        toast.error('Sorry This Email Already In Use.');
+        setLoginErr(true);
       });
   };
-  if (loding) {
+  // const handeleNameImg = () => {
+  //   namePhotoURL(imgNam.nam, imgNam.pic)
+  //     .then(() => {
+  //       console.log('Succesfully UpdateImage');
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message, 'Sorry Not Update Image');
+  //     });
+  // };
+  console.log(imgNam);
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        console.log('Succes login', result.user);
+        // toast.success('Successfully Login.');
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+        setLoginErr(true);
+      });
+  };
+  const handleFbLogin = () => {
+    fbLogin()
+      .then((result) => {
+        console.log('Succes login', result.user);
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+        setLoginErr(true);
+      });
+  };
+  const handleTwitterLogin = () => {
+    twitterLogin()
+      .then((result) => {
+        console.log('Succes login', result.user);
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+        setLoginErr(true);
+      });
+  };
+
+  if (loding && !loginErr) {
     return <Loding />;
   }
   return (
     <div className="">
+      <Toaster />
       <Nav />
       <div className="flex items-center justify-center min-h-[calc(100vh-92px)]">
         <div className="flex flex-col md:flex-row-reverse items-center w-full gap-5 border-2 rounded-lg border-secondary min-h-[450px] md:p-10 mt-8">
@@ -103,26 +178,37 @@ const Register = () => {
                   <p className="text-sm text-red-500 italic">{emailErr}</p>
                 )}
               </div>
-              <label className="relative input input-bordered flex items-center gap-2">
-                <RiLockPasswordFill />
-                <input
-                  type={eye ? 'text' : 'password'}
-                  name="password"
-                  className="grow"
-                  required
-                  placeholder="Password"
-                />
-                <div
-                  onClick={() => setEye(!eye)}
-                  className="cursor-pointer text-xl absolute right-3"
-                >
-                  {eye ? <FaEyeSlash /> : <FaEye />}
-                </div>
-              </label>
               <div>
                 <label
                   className={
                     passErr
+                      ? 'relative input input-bordered flex items-center gap-2 border-red-500'
+                      : 'relative input input-bordered flex items-center gap-2'
+                  }
+                >
+                  <RiLockPasswordFill />
+                  <input
+                    type={eye ? 'text' : 'password'}
+                    name="password"
+                    className="grow"
+                    required
+                    placeholder="Password"
+                  />
+                  <div
+                    onClick={() => setEye(!eye)}
+                    className="cursor-pointer text-xl absolute right-3"
+                  >
+                    {eye ? <FaEyeSlash /> : <FaEye />}
+                  </div>
+                </label>
+                {passErr && (
+                  <p className="text-sm text-red-500 italic">{passErr}</p>
+                )}
+              </div>
+              <div>
+                <label
+                  className={
+                    confPassErr
                       ? 'input input-bordered flex items-center gap-2 border-red-500'
                       : 'input input-bordered flex items-center gap-2'
                   }
@@ -135,12 +221,13 @@ const Register = () => {
                     placeholder="Confirm Password"
                   />
                 </label>
-                {passErr && (
-                  <p className="text-sm text-red-500 italic">{passErr}</p>
+                {confPassErr && (
+                  <p className="text-sm text-red-500 italic">{confPassErr}</p>
                 )}
               </div>
 
               <input
+                // onClick={handeleNameImg}
                 type="submit"
                 value="Register"
                 className="w-full py-2 px-4 rounded-md text-center text-white font-bold bg-secondary active:scale-95 duration-150 cursor-pointer hover:bg-[#bb019c]"
@@ -154,19 +241,28 @@ const Register = () => {
             </p>
             <div className="divider divider-secondary">Or</div>
             <div className="flex flex-col gap-2">
-              <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-indigo-900/20 rounded-md flex items-center justify-center gap-2 bg-white">
+              <button
+                onClick={handleGoogleLogin}
+                className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-indigo-900/20 rounded-md flex items-center justify-center gap-2 bg-white"
+              >
                 <span>
                   <FcGoogle />
                 </span>
                 Login With Google
               </button>
-              <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-500/20 rounded-md  flex items-center justify-center gap-2">
+              <button
+                onClick={handleFbLogin}
+                className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-500/20 rounded-md  flex items-center justify-center gap-2"
+              >
                 <span className="text-blue-500">
                   <FaFacebook />
                 </span>
                 Login With Facebook
               </button>
-              <button className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-400-900/20 rounded-md  flex items-center justify-center gap-2">
+              <button
+                onClick={handleTwitterLogin}
+                className="py-2 px-4 w-full font-medium border-y hover:shadow-lg shadow-blue-400-900/20 rounded-md  flex items-center justify-center gap-2"
+              >
                 <span className="text-blue-400">
                   <FaTwitter />
                 </span>

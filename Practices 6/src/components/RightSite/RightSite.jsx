@@ -1,20 +1,48 @@
+import { useContext } from 'react';
 import rightSiteImg1 from '../../assets/qZone1.png';
 import rightSiteImg2 from '../../assets/qZone2.png';
 import rightSiteImg3 from '../../assets/qZone3.png';
 
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import { ContextAuth } from '../../provider/Provider';
 const RightSite = () => {
+  const { googleLogin, twitterLogin } = useContext(ContextAuth);
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        console.log('Succes login', result.user);
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+      });
+  };
+  const handleTwitterLogin = () => {
+    twitterLogin()
+      .then((result) => {
+        console.log('Succes login', result.user);
+      })
+      .catch((err) => {
+        console.log('UnSucces login', err.message);
+      });
+  };
   return (
     <div>
       <h1 className="text-neutral-700 text-xl font-semibold pb-5">
         Login With
       </h1>
       <div className="flex flex-col gap-2">
-        <button className="w-full rounded-md border-2 border-black bg-white text-neutral-700 hover:border-blue-400 hover:text-blue-400 py-2 px-4 flex items-center gap-2 justify-center">
+        <button
+          onClick={handleGoogleLogin}
+          className="w-full rounded-md border-2 border-black bg-white text-neutral-700 hover:border-blue-400 hover:text-blue-400 py-2 px-4 flex items-center gap-2 justify-center"
+        >
           <FcGoogle /> Login With Google
         </button>
-        <button className="w-full rounded-md border-2 border-black bg-white text-neutral-700 hover:border-blue-400 hover:text-blue-400 py-2 px-4 flex items-center gap-2 justify-center">
+        <button
+          onClick={handleTwitterLogin}
+          className="w-full rounded-md border-2 border-black bg-white text-neutral-700 hover:border-blue-400 hover:text-blue-400 py-2 px-4 flex items-center gap-2 justify-center"
+        >
           <span className="text-blue-400">
             <FaTwitter />
           </span>
@@ -27,12 +55,16 @@ const RightSite = () => {
           Find Us On
         </h2>
         <div>
-          <button className="flex gap-2 items-center px-4 py-2 border rounded-t-md w-full">
+          <a
+            href="https://www.facebook.com/ataullah0"
+            target="_blank"
+            className="flex gap-2 items-center px-4 py-2 border rounded-t-md w-full"
+          >
             <span className="text-indigo-800 bg-zinc-100 p-2 rounded-full">
               <FaFacebookF />
             </span>
             Facebook
-          </button>
+          </a>
           <button className="flex gap-2 items-center px-4 py-2 border w-full">
             <span className="text-blue-400 bg-zinc-100 p-2 rounded-full">
               <FaTwitter />

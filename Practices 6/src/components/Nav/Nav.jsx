@@ -62,9 +62,13 @@ const Nav = () => {
               className="cursor-pointer"
               onClick={() => setViewProfile(!viewProfile)}
             >
-              <img src={userPic} alt="" className="h-10 w-10" />
+              <img
+                src={userDta.photoURL ? userDta.photoURL : userPic}
+                alt=""
+                className="rounded-full h-12 w-12"
+              />
               <div
-                className={`absolute top-14 lg:top-16 right-3 duration-3000 transition-transform ${
+                className={`absolute z-50 top-14 lg:top-16 right-3 duration-3000 transition-transform ${
                   viewProfile
                     ? 'translate-x-0 visible'
                     : 'translate-x-96 invisible'
